@@ -25,6 +25,7 @@ import Requestdetails from './Requestdetails'
 import Ownernav from './Ownernav'
 import Header from './Header'
 import Mission from './Mission'
+import ErrorMessage from  './ErrorMessage'
 
 export{
     Navbar,
@@ -54,4 +55,5 @@ export{
     Ownernav,
     Header,
     Mission,
+    ErrorMessage,
 };

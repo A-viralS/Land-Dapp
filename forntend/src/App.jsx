@@ -16,7 +16,7 @@ const App = () => {
 
   useEffect(()=>{
     const template=async()=>{
-      const contractAddress="0x9C548a28c9BD60594F0FE095EAb010859Efe546B";
+      const contractAddress="0x5FbDB2315678afecb367f032d93F642f64180aa3";
       const contractABI=abi.abi;
 
       //Metamask Part
@@ -52,7 +52,7 @@ const App = () => {
         <Route index element={<Home />} />
         <Route path='/home'  element={<Home />}/>
         <Route path='/about'  element={<About />} />
-        <Route path='/add land inspector'  element={<Add_land_inspector />} />
+        <Route path='/add land inspector'  element={<Add_land_inspector state={state} />} />
         <Route path='/land inspector'  element={<Land_inspector />} />
         <Route path='/land registration'  element={<Land_registration />} />
         <Route path='/login'  element={<Login state={state} account={account}/>} />
@@ -62,7 +62,7 @@ const App = () => {
         <Route path='/requests'  element={<Requests />} />
         <Route path='/user dashboard'  element={<User_dashboard />} />
         <Route path='/user registration'  element={<User_registration state={state}/>} />
-        <Route path='/register land'  element={<Register_land/>} />
+        <Route path='/register land'  element={<Register_land state={state}/>} />
         <Route path='/inspector dashboard'  element={<Inspector_dashboard/>} />
         <Route path='/verify land'  element={<Verify_land/>} />
         <Route path='/verify user'  element={<Verify_user/>} />

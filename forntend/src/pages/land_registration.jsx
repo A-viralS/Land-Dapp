@@ -1,7 +1,7 @@
 import React from 'react'
 import { Footer2, UserTopbar, UserNavbar, } from '../components'
 
-const land_registration = () => (
+const land_registration = ({state}) => (
   <div className="bg-primary w-full overflow-hidden h-full absolute">
     {/* <UserNavbar/> */}
     <div className='absolute z-[1]'>

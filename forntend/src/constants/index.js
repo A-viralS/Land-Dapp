@@ -71,7 +71,7 @@ export const Inspectorform = [
   {
     id: "district",
     title:"Enter District",
-    type: "email",
+    type: "text",
 
   },
   {
@@ -155,7 +155,7 @@ export const landForm = [
 
   },
   {
-    id: "marketValues",
+    id: "marketValue",
     title:"Enter Market Value(in Gh cedis)",
     type: "number",
 

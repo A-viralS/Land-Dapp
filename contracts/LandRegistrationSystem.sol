@@ -1,6 +1,7 @@
 //SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
+
 contract LandRegistrationSystem {
     struct Land {
         uint landId;
@@ -8,7 +9,7 @@ contract LandRegistrationSystem {
         string district;
         string state;
         address owner;
-        uint marketValue;
+        uint  marketValue;
         uint size;
         string landDocument;
         bool verified;
@@ -51,17 +52,6 @@ contract LandRegistrationSystem {
     event AddUser(address recipient, uint taskId);
     event AddlandInspector(address recipient, uint taskId);
 
-    uint public unlockTime;
-
-    // constructor(uint _unlockTime) payable {
-    //     require(
-    //         block.timestamp < _unlockTime,
-    //         "Unlock time should be in the future"
-    //     );
-
-    //     unlockTime = _unlockTime;
-    //     owner = payable(msg.sender);
-    // }
 
     constructor() {
         owner = msg.sender;
@@ -92,8 +82,8 @@ contract LandRegistrationSystem {
 
     // onlyLandInspector
 
-    function verifyUser(uint inspectorId, uint userId, bool isverified) external {
-        user[userId].verified = isverified;
+    function verifyUser(uint inspectorId, uint userId) external {
+        user[userId].verified = true;
         // require(users[userId].walletAddress == userAddress, "User not found");
         landInspector[inspectorId].verifiedUser++;
     }
@@ -119,20 +109,22 @@ contract LandRegistrationSystem {
         return (land[landId].city, land[landId].district, land[landId].state, land[landId].marketValue, land[landId].size, land[landId].forSell);
     }
 
-    function createLandInspector(string memory _district, string memory _city) public {
+    function createLandInspector(address _walletAddress, string memory _district, string memory _city) public {
         require(bytes(_district).length > 0, "District is required");
         require(bytes(_city).length > 0, "City is required");
+        require(_walletAddress != address(0), "Address is required");
         uint landInspectorId = landInspector.length;
-        landInspector.push( LandInspector(landInspectorId, msg.sender, _district, _city, 0, 0));
-        landInspectors[landInspectorId] = msg.sender;
-        emit AddlandInspector(msg.sender, landInspectorId);
+        landInspector.push( LandInspector(landInspectorId, _walletAddress, _district, _city, 0, 0));
+        landInspectors[landInspectorId] = _walletAddress;
+        emit AddlandInspector(_walletAddress, landInspectorId);
     }
 
-// onlyLandInspector
-    function verifyLand(uint landId) public  {
+    // onlyLandInspector
+
+    function verifyLand(uint inspectorId, uint landId) public  {
         // require(lands[landId] == msg.sender, "You are not the land owner.");
         land[landId].verified = true;
-        // landInspector[msg.sender].verifiedLand++;
+        landInspector[inspectorId].verifiedLand++;
     }
 
     function setLandForSale(uint landId) public onlyLandOwner(landId) {
@@ -206,13 +198,26 @@ contract LandRegistrationSystem {
         return result;
     }
 
-    function searchLands(string memory _keyword) external view returns (Land[] memory) {
+    function searchLandsforInspector(string memory _keyword) external view returns (Land[] memory) {
         Land[] memory temporary = new Land[](land.length);
         uint counter = 0;
+        bytes32 keywordHash = keccak256(abi.encodePacked(_keyword)); // hash the keyword to reduce gas cost
+        string memory lowercaseKeyword = lowercase(_keyword);
+        bytes32 lowercaseKeywordHash = keccak256(abi.encodePacked(lowercaseKeyword)); // hash the lowercase keyword to reduce gas cost
         for(uint i=0; i<land.length; i++) {
-            if(keccak256(bytes(land[i].city)) == keccak256(bytes(_keyword)) || keccak256(bytes(land[i].district)) == keccak256(bytes(_keyword))) {
+            bytes32 cityHash = keccak256(bytes(land[i].city));
+            bytes32 districtHash = keccak256(bytes(land[i].district));
+            if((cityHash == keywordHash || districtHash == keywordHash)&&land[i].verified==false) {
                 temporary[counter] = land[i];
                 counter++;
+            } else if ((cityHash.length == keywordHash.length || districtHash.length == keywordHash.length)) {
+                // If cityHash, districtHash and keywordHash have the same length ,
+                // they could still be a match if they are equal when compared in lowercase.
+                if ((keccak256(bytes(lowercase(land[i].city))) == lowercaseKeywordHash || 
+                    keccak256(bytes(lowercase(land[i].district))) == lowercaseKeywordHash)&&land[i].verified==false) {
+                    temporary[counter] = land[i];
+                    counter++;
+                }
             }
         }
 
@@ -223,7 +228,52 @@ contract LandRegistrationSystem {
         return result;
     }
 
-    
+    function searchLands(string memory _keyword) external view returns (Land[] memory) {
+        Land[] memory temporary = new Land[](land.length);
+        uint counter = 0;
+        bytes32 keywordHash = keccak256(abi.encodePacked(_keyword)); // hash the keyword to reduce gas cost
+        string memory lowercaseKeyword = lowercase(_keyword);
+        bytes32 lowercaseKeywordHash = keccak256(abi.encodePacked(lowercaseKeyword)); // hash the lowercase keyword to reduce gas cost
+        for(uint i=0; i<land.length; i++) {
+            bytes32 cityHash = keccak256(bytes(land[i].city));
+            bytes32 districtHash = keccak256(bytes(land[i].district));
+            if(cityHash == keywordHash || districtHash == keywordHash) {
+                temporary[counter] = land[i];
+                counter++;
+            } else if (cityHash.length == keywordHash.length || districtHash.length == keywordHash.length) {
+                // If cityHash, districtHash and keywordHash have the same length,
+                // they could still be a match if they are equal when compared in lowercase.
+                if (keccak256(bytes(lowercase(land[i].city))) == lowercaseKeywordHash || 
+                    keccak256(bytes(lowercase(land[i].district))) == lowercaseKeywordHash) {
+                    temporary[counter] = land[i];
+                    counter++;
+                }
+            }
+        }
+
+        Land[] memory result = new Land[](counter);
+        for(uint i=0; i<counter; i++) {
+            result[i] = temporary[i];
+        }
+        return result;
+    }
+
+    // helper function to convert a string to lowercase
+    function lowercase(string memory str) internal pure returns (string memory) {
+        bytes memory bStr = bytes(str);
+        bytes memory bLower = new bytes(bStr.length);
+        for (uint i = 0; i < bStr.length; i++) {
+            // Uppercase character...
+            if ((uint8(bStr[i]) >= 65) && (uint8(bStr[i]) <= 90)) {
+                // So we add 32 to make it lowercase
+                bLower[i] = bytes1(uint8(bStr[i]) + 32);
+            } else {
+                bLower[i] = bStr[i];
+            }
+        }
+        return string(bLower);
+    }
+
     function getNonVerifiedUsers()  external view returns (User[] memory) {
         User[] memory temporary = new User[](user.length);
         uint counter = 0;
@@ -271,17 +321,31 @@ contract LandRegistrationSystem {
         return result;
     }
 
+    function getInspectors()  external view returns (LandInspector[] memory) {
+        LandInspector[] memory temporary = new LandInspector[](landInspector.length);
+        uint counter = 0;
+        for(uint i=0; i<landInspector.length; i++) {
+                temporary[counter] = landInspector[i];
+                counter++;
+        }
+
+        LandInspector[] memory result = new LandInspector[](counter);
+        for(uint i=0; i<counter; i++) {
+            result[i] = temporary[i];
+        }
+        return result;
+    }
+
     function buyLand(uint  landId) public payable {
         require(land[landId].verified == true, "Land is not yet verified");
         require(land[landId].forSell == true, "Land is not for sale");
-        require(msg.value >= land[landId].marketValue, "Insufficient funds");
+        require(msg.value >0, "Insufficient funds, Please You pay more than 0 ether");
 
         address payable seller = payable(land[landId].owner);
         seller.transfer(msg.value);
         land[landId].owner = msg.sender;
+        lands[landId] = msg.sender;
         land[landId].forSell = false;
-
-        emit LandSold(seller, msg.sender, msg.value);
     }
 
 }

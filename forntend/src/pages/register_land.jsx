@@ -1,11 +1,11 @@
 import React from 'react'
 import { Footer2, UserTopbar,Form } from '../components'
 
-const register_land = () => (
+const register_land = ({state}) => (
   <div className="bg-white w-full overflow-hidden h-full ">
     <UserTopbar/>
     <div>
-      <Form/>
+      <Form state={state}/>
     </div>
     <div className=" bottom-0 w-full">
       <Footer2/>
