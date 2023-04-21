@@ -2,7 +2,7 @@ import { useState } from "react";
 import * as ipfsClient from "ipfs-http-client";
 import { Buffer } from "buffer";
 import { landForm } from "../constants";
-import { ethers } from "ethers";
+// import { ethers } from "ethers";
 import ErrorMessage from "./ErrorMessage";
 
 const Form = ({ state }) => {

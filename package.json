@@ -5,6 +5,7 @@
     "hardhat": "^2.14.0"
   },
   "dependencies": {
+    "bignumber.js": "^9.1.1",
     "dotenv": "^16.0.3",
     "tailwindcss": "^3.3.1"
   }

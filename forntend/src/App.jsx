@@ -16,7 +16,7 @@ const App = () => {
 
   useEffect(()=>{
     const template=async()=>{
-      const contractAddress="0x5FbDB2315678afecb367f032d93F642f64180aa3";
+      const contractAddress="0x5EF3a388AF7C8A152C67DbF56cDECe7fF2E76e55";
       const contractABI=abi.abi;
 
       //Metamask Part
@@ -57,7 +57,7 @@ const App = () => {
         <Route path='/land registration'  element={<Land_registration />} />
         <Route path='/login'  element={<Login state={state} account={account}/>} />
         <Route path='/profile'  element={<Profile />} />
-        <Route path='/property'  element={<Property />} />
+        <Route path='/property'  element={<Property state={state}/>} />
         <Route path='/requested'  element={<Requested />} />
         <Route path='/requests'  element={<Requests />} />
         <Route path='/user dashboard'  element={<User_dashboard />} />

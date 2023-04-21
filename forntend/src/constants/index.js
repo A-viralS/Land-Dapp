@@ -83,12 +83,6 @@ export const Inspectorform = [
 ];
 export const Userform = [
   {
-    id: "walletAddress",
-    title:"Enter Wallet Address",
-    type: "text",
-
-  },
-  {
     id: "emailAddress",
     title:"Enter Email Address",
     type: "email",

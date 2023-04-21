@@ -60,8 +60,8 @@ const add_land_inspector = ({state}) =>{
         {errorMessage && (
             <ErrorMessage message={errorMessage}/>  
         )}
-       <div className="justify-center items-center bg-slate-200 flex">
-           <form action="" method="" onSubmit={registerInspector} className="mt-[50px] flex flex-col w-full items-center">
+       <div className="justify-center items-center bg-slate-200 flex ">
+           <form action="" method="" onSubmit={registerInspector} className="mt-[50px] mb-[100px] flex flex-col w-full items-center">
                <div className={`flex w-[80%] justify-center flex-col max-ss:items-center`}>
                  <div className="grid md:grid-cols-2 md:gap-x-20 gap-y-10  md:w-fit w-full justify-center ">
                    { Inspectorform.map((Userform, index) =>(
