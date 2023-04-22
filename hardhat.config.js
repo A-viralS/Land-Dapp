@@ -1,5 +1,4 @@
 require("@nomicfoundation/hardhat-toolbox");
-
 require("dotenv").config();
 /** @type import('hardhat/config').HardhatUserConfig */
 
@@ -11,7 +10,7 @@ module.exports = {
     settings: {
       optimizer: {
         enabled: true,
-        runs: 1000,
+        runs: 1,
       },
     },
   },
@@ -21,7 +20,11 @@ module.exports = {
     },
     goerli: {
       url: GOERLI_URL,
-      accounts: [PRIVATE_KEY],
+      accounts: [`0x${PRIVATE_KEY}`],
+    },
+    localganache: {
+      url: process.env.GANACHE_URL,
+      accounts: [`0x${process.env.GANACHE_KEY}`]
     },
   },
 };

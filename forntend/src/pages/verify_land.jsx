@@ -1,212 +1,111 @@
 import { Footer2, Topnav, } from '../components'
+import { useEffect, useState, React } from "react";
 
-const verify_land = () => (
-  <div className="bg-white w-full overflow-hidden h-full ">
-    <Topnav/>
-    <div>
-      <div className="flex justify-center my-3 ">
-        <div className="flex border-gray-400 border w-[90%] max-ss:w-[70%] max-xs:w-[85%] flex-col my-10">
+const verify_land = ({state}) =>{
+  const [landList, setLandList] = useState([])
+  const {contract} = state;
+
+  useEffect(() =>{
+    const getUnverifiedLand = async (event) => {
+      const data = await contract.getNonVerifiedLands();
+      setLandList(data)
+      // console.log(data)
+    };
+    contract && getUnverifiedLand()
+  }, [contract])
+
+  const verifyland = async (event) => {
+    event.preventDefault();
+    const { contract } = state;
+    const _landId = document.querySelector("#landid").value;
+    const _InspectorId = ""
+    
+    try {
+      if (_landId) {
+        console.log("Transaction Is In Progress.");
+        alert("Transaction Is In Progress.")
+        const transaction = await contract.verifyLand(
+          _landId,
+          _InspectorId
+        );
+        await transaction.wait();
+        console.log("Transaction Is Successful.");
+        alert("Transaction Is Successful.");
+      }
+      else{
+        setErrorMessage("All fields are required for registering your land");
+      }
+    } catch (error) {
+      console.log(error);
+      setErrorMessage("An error occurred while registering the land", error.message);
+    }
+  checkForError()
+  }
+
+
+  return(
+<div className="bg-white w-full overflow-hidden h-full">
+  <Topnav />
+  <div className="flex justify-center my-3 flex-col items-center">
+    {landList.map((land) => (
+      <>
+        <div
+          key={Math.random()}
+          className="flex border-gray-400 border sm:w-[80%] w-full flex-col my-10 items-end pr-10"
+        >
+          <table className="sm:w-full w-[80%] text-left">
           <div>
-            <h1 className=" max-ss:ml-[40%] ml-[40px]">Land Details</h1>
+            <h1 className="text-center text-[20px]">Land Details</h1>
           </div>
-
-          <div className={`flex flex-row ss:p-[20px] py-[20px] ss:gap-5 items-center  max-xs:my-4 max-ss:flex-col`}>
-
-            <div className="justify-center items-center ss:w-[15%] w-full">
-              <div className=" max-ss:border-b border-black max-ss:w-[100%] flex max-ss:flex-row flex-col justify-left ">
-              <p className="p-[10px] text-center max-ss:text-slate-900 max-ss:ml-[40px]">
-                Distract
-              <hr className="w-full  bg-black max-ss:opacity-0" />
-              </p>
-              <h3 className="p-[10px] text-center font-poppins font-normal max-ss:text-slate-500 max-md:text-[14p] text-[18px] ss:mt-[20px]">
-                Accra
-                Accra
-              </h3>
-
-              </div>
-            </div>
-
-            <div className="justify-center items-center ss:w-[15%] w-full">
-              <div className=" max-ss:border-b border-black max-ss:w-[100%] flex max-ss:flex-row flex-col justify-left ">
-              <p className="p-[10px] text-center max-ss:text-slate-900 max-ss:ml-[40px]">
-                City
-              <hr className="w-full  bg-black max-ss:opacity-0" />
-              </p>
-              <h3 className="p-[10px] text-center font-poppins font-normal max-ss:text-slate-500  text-[18px] ss:mt-[20px]">
-                Dansoman
-              </h3>
-
-              </div>
-            </div>
-
-            <div className="justify-center items-center ss:w-[15%] w-full">
-              <div className=" max-ss:border-b border-black max-ss:w-[100%] flex max-ss:flex-row flex-col justify-left ">
-              <p className="p-[10px] text-center max-ss:text-slate-900 max-ss:ml-[40px]">
-                State
-              <hr className="w-full  bg-black max-ss:opacity-0" />
-              </p>
-              <h3 className="p-[10px] text-center font-poppins font-normal max-ss:text-slate-500  text-[18px] ss:mt-[20px]">
-                Greater Accra
-              </h3>
-
-              </div>
-            </div>
-
-            <div className="justify-center items-center ss:w-[15%] w-full">
-              <div className=" max-ss:border-b border-black max-ss:w-[100%] flex max-ss:flex-row flex-col justify-left ">
-              <p className="p-[10px] text-center max-ss:text-slate-900 max-ss:ml-[40px]">
-                Property Number
-              <hr className="w-full  bg-black max-ss:opacity-0" />
-              </p>
-              <h3 className="p-[10px] text-center font-poppins font-normal max-ss:text-slate-500  text-[18px] ss:mt-[20px]">
-                0001
-              </h3>
-
-              </div>
-            </div>
-
-            <div className="justify-center items-center ss:w-[15%] w-full">
-              <div className=" max-ss:border-b border-black max-ss:w-[100%] flex max-ss:flex-row flex-col justify-left ">
-              <p className="p-[10px] text-center max-ss:text-slate-900 max-ss:ml-[40px]">
-                Size
-              <hr className="w-full  bg-black max-ss:opacity-0" />
-              </p>
-              <h3 className="p-[10px] text-center font-poppins font-normal max-ss:text-slate-500  text-[18px] ss:mt-[20px]">
-                100 plots
-              </h3>
-
-              </div>
-            </div>
-
-            <div className="justify-center items-center ss:w-[15%] w-full">
-              <div className=" max-ss:border-b border-black max-ss:w-[100%] flex max-ss:flex-row flex-col justify-left ">
-              <p className="p-[10px] text-center max-ss:text-slate-900 max-ss:ml-[40px]">
-                Land Document
-              <hr className="w-full  bg-black max-ss:opacity-0" />
-              </p>
-              <h3 className="p-[10px] text-center font-poppins font-normal max-ss:text-slate-500  text-[18px] ss:mt-[20px]">
-                Hello World.
-              </h3>
-
-              </div>
-            </div>
-
+            <tbody>
+              <tr>
+                <th className="bg-gray-100 p-2 w-1/4 sm:w-1/6">District</th>
+                <td className="bg-gray-200 p-2">{land.district}</td>
+              </tr>
+              <tr>
+                <th className="bg-gray-100 p-2 w-1/4 sm:w-1/6">City</th>
+                <td className="bg-gray-200 p-2">{land.city}</td>
+              </tr>
+              <tr>
+                <th className="bg-gray-100 p-2 w-1/4 sm:w-1/6">State</th>
+                <td className="bg-gray-200 p-2">{land.state}</td>
+              </tr>
+              <tr>
+                <th className="bg-gray-100 p-2 w-1/4 sm:w-1/6">
+                  Property Number
+                </th>
+                <td className="bg-gray-200 p-2">
+                  0001 {land.landId.toString()}
+                </td>
+              </tr>
+              <tr>
+                <th className="bg-gray-100 p-2 w-1/4 sm:w-1/6">Size</th>
+                <td className="bg-gray-200 p-2">{land.size.toString()} Square Feet</td>
+              </tr>
+              <tr>
+                <th className="bg-gray-100 p-2 w-1/4 sm:w-1/6">
+                  Land Document
+                </th>
+                <td className="bg-gray-200 p-2">{land.landDocument}</td>
+              </tr>
+            </tbody>
+          </table>
+          <div className="text-center my-2">
+            <button id="landid" className="add-btn focus:bg-blue-300 focus:text-black" value={land.landId.toString()} onClick={verifyland}>
+              Verify
+            </button>
           </div>
-            <div className="  max-ss:ml[60%] max-xs:ml-5 ml-[70%]">
-              <form action=" ">
-                <div>
-                  <button className={`add-btn focus:bg-blue-300 focus:text-black max-ss:px-[40px]`}>Verify</button>
-                </div>
-              </form>
-            </div>
-
         </div>
-      </div>
-      
-      <div className="flex justify-center my-3 ">
-        <div className="flex border-gray-400 border w-[90%] max-ss:w-[70%] max-xs:w-[85%] flex-col my-10">
-          <div>
-            <h1 className=" max-ss:ml-[40%] ml-[40px]">Land Details</h1>
-          </div>
-
-          <div className={`flex flex-row ss:p-[20px] py-[20px] ss:gap-5 items-center  max-xs:my-4 max-ss:flex-col`}>
-
-            <div className="justify-center items-center ss:w-[15%] w-full">
-              <div className=" max-ss:border-b border-black max-ss:w-[100%] flex max-ss:flex-row flex-col justify-left ">
-              <p className="p-[10px] text-center max-ss:text-slate-900 max-ss:ml-[40px]">
-                Distract
-              <hr className="w-full  bg-black max-ss:opacity-0" />
-              </p>
-              <h3 className="p-[10px] text-center font-poppins font-normal max-ss:text-slate-500 max-md:text-[14p] text-[18px] ss:mt-[20px]">
-                Accra
-                Accra
-              </h3>
-
-              </div>
-            </div>
-
-            <div className="justify-center items-center ss:w-[15%] w-full">
-              <div className=" max-ss:border-b border-black max-ss:w-[100%] flex max-ss:flex-row flex-col justify-left ">
-              <p className="p-[10px] text-center max-ss:text-slate-900 max-ss:ml-[40px]">
-                City
-              <hr className="w-full  bg-black max-ss:opacity-0" />
-              </p>
-              <h3 className="p-[10px] text-center font-poppins font-normal max-ss:text-slate-500  text-[18px] ss:mt-[20px]">
-                Dansoman
-              </h3>
-
-              </div>
-            </div>
-
-            <div className="justify-center items-center ss:w-[15%] w-full">
-              <div className=" max-ss:border-b border-black max-ss:w-[100%] flex max-ss:flex-row flex-col justify-left ">
-              <p className="p-[10px] text-center max-ss:text-slate-900 max-ss:ml-[40px]">
-                State
-              <hr className="w-full  bg-black max-ss:opacity-0" />
-              </p>
-              <h3 className="p-[10px] text-center font-poppins font-normal max-ss:text-slate-500  text-[18px] ss:mt-[20px]">
-                Greater Accra
-              </h3>
-
-              </div>
-            </div>
-
-            <div className="justify-center items-center ss:w-[15%] w-full">
-              <div className=" max-ss:border-b border-black max-ss:w-[100%] flex max-ss:flex-row flex-col justify-left ">
-              <p className="p-[10px] text-center max-ss:text-slate-900 max-ss:ml-[40px]">
-                Property Number
-              <hr className="w-full  bg-black max-ss:opacity-0" />
-              </p>
-              <h3 className="p-[10px] text-center font-poppins font-normal max-ss:text-slate-500  text-[18px] ss:mt-[20px]">
-                0001
-              </h3>
-
-              </div>
-            </div>
-
-            <div className="justify-center items-center ss:w-[15%] w-full">
-              <div className=" max-ss:border-b border-black max-ss:w-[100%] flex max-ss:flex-row flex-col justify-left ">
-              <p className="p-[10px] text-center max-ss:text-slate-900 max-ss:ml-[40px]">
-                Size
-              <hr className="w-full  bg-black max-ss:opacity-0" />
-              </p>
-              <h3 className="p-[10px] text-center font-poppins font-normal max-ss:text-slate-500  text-[18px] ss:mt-[20px]">
-                100 plots
-              </h3>
-
-              </div>
-            </div>
-
-            <div className="justify-center items-center ss:w-[15%] w-full">
-              <div className=" max-ss:border-b border-black max-ss:w-[100%] flex max-ss:flex-row flex-col justify-left ">
-              <p className="p-[10px] text-center max-ss:text-slate-900 max-ss:ml-[40px]">
-                Land Document
-              <hr className="w-full  bg-black max-ss:opacity-0" />
-              </p>
-              <h3 className="p-[10px] text-center font-poppins font-normal max-ss:text-slate-500  text-[18px] ss:mt-[20px]">
-                Hello World.
-              </h3>
-
-              </div>
-            </div>
-
-          </div>
-            <div className="  max-ss:ml[60%] max-xs:ml-5 ml-[70%]">
-              <form action=" ">
-                <div>
-                  <button className={`add-btn focus:bg-blue-300 focus:text-black max-ss:px-[40px]`}>Verify</button>
-                </div>
-              </form>
-            </div>
-
-        </div>
-      </div>
-      
-    </div>
-    <div className=" bottom-0 w-full">
-    <Footer2/>
-    </div>
+      </>
+    ))}
   </div>
-)
+  <div className="bottom-0 w-full">
+    <Footer2 />
+  </div>
+</div>
+
+  )
+} 
+
 
 export default verify_land

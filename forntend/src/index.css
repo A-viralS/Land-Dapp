@@ -143,6 +143,14 @@
   border-radius: 5px;
   margin: 0 0 20px;
 }
+.cancel-btn{
+  background-color: #ea0000;
+  color: whitesmoke;
+  font-size: medium;
+  padding: 15px 60px;
+  border-radius: 5px;
+  margin: 0 0 20px;
+}
 .addUser-btn{
   background-color: #06b34b;
   color: whitesmoke;

@@ -1,63 +1,26 @@
 //SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-contract LandRegistrationSystem {
-    struct Land {
-        uint256  landId;
-        string city;
-        string district;
-        string state;
-        address owner;
-        uint256   marketValue;
-        string propertyNumber;
-        uint256  size;
-        string landDocument;
-        bool verified;
-        bool forSell;
-    }
+import "./Land.sol";
+import "./User.sol";
+import "./LandInspector.sol";
 
-    struct User {
-        uint256  userId;
-        address walletAddress;
-        string emailAddress;
-        string firstName;
-        string lastName;
-        string contact;
-        string residentialAddress;
-        string ghanaCard;
-        uint256  landSold;
-        bool verified;
-    }
 
-    struct LandInspector {
-        uint256  inspectorId;
-        address walletAddress;
-        string district;
-        string city;
-        uint256  verifiedUser;
-        uint256  verifiedLand;
-    }
-
-    Land[] private land;
-    User[] private user;
-    LandInspector[] private landInspector;
+contract LandRegistrationSystem is Land, User, LandInspector {
 
     address owner;
-    mapping (uint256  => address) public users;
-    mapping (uint256  => address) public landInspectors;
-    mapping (uint256  => address) public lands; // use propertyNumber as primary key
+    
+    // mapping (uint256 => address) public users;
+    // mapping (uint256 => address) public landInspectors;
+    // mapping (uint256 => address) public lands; // use propertyNumber as primary key
 
-    event LandSold(address indexed _seller, address indexed _buyer, uint256  _value);
-    event AddLand(address recipient, uint256  taskId);
-    event AddUser(address recipient, uint256  taskId);
-    event AddlandInspector(address recipient, uint256  taskId);
-
+    event LandSold(address indexed _seller, address indexed _buyer, uint256 _value);
 
     constructor() {
         owner = msg.sender;
     }
 
-    modifier onlyLandOwner(uint256  landId) {
+    modifier onlyLandOwner(uint256 landId) {
         require(lands[landId] == msg.sender, "You are not the land owner.");
         _;
     }
@@ -73,53 +36,7 @@ contract LandRegistrationSystem {
         require(isLandInspector == true, "You are not a land inspector.");
         _;
     }
-
-    function createUser(string memory _emailAddress, string memory _firstName, string memory _lastName, string memory _contact, string memory _residentialAddress, string memory _ghanaCard) public {
-        require(bytes(_emailAddress).length > 0, "Email address is required");
-        require(bytes(_firstName).length > 0, "First name is required");
-        require(bytes(_lastName).length > 0, "Last name is required");
-        require(bytes(_contact).length > 0, "Contact is required");
-        require(bytes(_residentialAddress).length > 0, "Residential address is required");
-        require(bytes(_ghanaCard).length > 0, "Ghana card is required");
-        uint userId = user.length;
-        user.push(User(userId, msg.sender, _emailAddress, _firstName, _lastName, _contact, _residentialAddress, _ghanaCard,0, false));
-        users[userId] = msg.sender;
-        emit AddUser(msg.sender, userId);
-    }
-
-    function createLand(string memory _city, string memory _district, string memory _state, string memory  _propertyNumber, uint256  _marketValue, uint256  _size, string memory _landDocument) public {
-        require(bytes(_city).length > 0, "City is required");
-        require(bytes(_district).length > 0, "District is required");
-        require(bytes(_state).length > 0, "State is required");
-        require(bytes(_propertyNumber).length > 0, "Property number is required");
-        require(_marketValue > 0, "Market value is required and must be greater than zero");
-        require(_size > 0, "Size is required and must be greater than zero");
-        require(bytes(_landDocument).length > 0, "Land document is required");
-        uint256  landId = land.length;
-        land.push( Land(landId, _city, _district, _state, msg.sender, _marketValue, _propertyNumber, _size, _landDocument, false, false));
-        lands[landId] = msg.sender;
-        emit AddLand(msg.sender, landId);
-        // add propertyNumber to user's list of owned lands
-    }
-
-
-    function getLandDetails(uint256  landId) public view returns (string memory, string memory, string memory, uint256 , uint256 , bool) {
-        require(land[landId].verified == true, "Land is not yet verified");
-        return (land[landId].city, land[landId].district, land[landId].state, land[landId].marketValue, land[landId].size, land[landId].forSell);
-    }
-
-    function createLandInspector(address _walletAddress, string memory _district, string memory _city) public {
-        require(bytes(_district).length > 0, "District is required");
-        require(bytes(_city).length > 0, "City is required");
-        require(_walletAddress != address(0), "Address is required");
-        uint landInspectorId = landInspector.length;
-        landInspector.push( LandInspector(landInspectorId, _walletAddress, _district, _city, 0, 0));
-        landInspectors[landInspectorId] = _walletAddress;
-        emit AddlandInspector(_walletAddress, landInspectorId);
-    }
-
-    // onlyLandInspector
-
+    
     function verifyUser(uint256  userId) public onlyLandInspector() {
         require(userId < user.length, "User does not exist.");
         require(user[userId].verified == false, "User has already been verified.");

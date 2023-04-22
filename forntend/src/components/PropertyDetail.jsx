@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
-import styles from "../style"
-import Button from './Button'
+import ErrorMessage from "./ErrorMessage";
 import { useState } from "react";
-import BigNumber from 'bignumber.js';
 
 
 const PropertyDetail = ({ state }) =>{
   const [landList, setLandList] = useState([])
   const {contract} = state;
+  const [errorMessage, setErrorMessage] = useState("");
+
 
   useEffect(() =>{
     const getLand = async (event) => {
@@ -31,8 +31,70 @@ const PropertyDetail = ({ state }) =>{
 
   }, [contract])
 
+  const putNotForSell = async (event) => {
+    event.preventDefault();
+    const { contract } = state;
+    const _forSell = document.querySelector("#forsell").value;
+
+    try {
+      if (_forSell) {
+        console.log("Transaction Is In Progress.");
+        alert("Transaction Is In Progress.")
+        const transaction = await contract.cancelSale(_forSell);
+        await transaction.wait();
+        console.log("Transaction Is Successful.");
+        alert("Transaction Is Successful.");
+      }
+      else{
+        setErrorMessage("All fields are required for registering your land");
+      }
+    } catch (error) {
+      console.log(error);
+      setErrorMessage("An error occurred while registering the land");
+    }
+  checkForError()
+  }
+  const putForSell = async (event) => {
+    event.preventDefault();
+    const { contract } = state;
+    const _forSell = document.querySelector("#forsell").value;
+
+    try {
+      if (_forSell) {
+        console.log("Transaction Is In Progress.");
+        alert("Transaction Is In Progress.")
+        const transaction = await contract.setLandForSale(_forSell);
+        await transaction.wait();
+        console.log("Transaction Is Successful.");
+        alert("Transaction Is Successful.");
+      }
+      else{
+        setErrorMessage("All fields are required for registering your land");
+      }
+    } catch (error) {
+      console.log(error);
+      setErrorMessage("An error occurred while registering the land");
+    }
+  checkForError()
+  }
+
+  const [isError, setError] = useState(false);
+  function checkForError() {
+    if(errorMessage){
+      setError(true);
+    }
+  }
+
   return (
     <div className="w-[100vw] mt-10">
+    {isError && 
+      <>
+      <ErrorMessage message={errorMessage}/>
+      </>
+      }
+      {errorMessage && (
+        <ErrorMessage message={errorMessage}/>  
+    )}
     {landList.map((land) => (
       <>
     <div className=" flex flex-col gap-0 items-center">
@@ -77,11 +139,15 @@ const PropertyDetail = ({ state }) =>{
         </div>
 
             <div className="text-[18px] font-semibold">
-                  <a href="#" className="">
-                    <button className={`login-btn hover:bg-blue-600 focus:bg-green-700 `}>
-                      Place For Sell
-                    </button>
-                  </a>
+              {land.forSell.toString()=="true"?
+              <button id="forsell" className={`cancel-btn hover:bg-red-400 focus:bg-blue-600 `} onClick={putNotForSell} value={land.landId.toString()}>
+                Cancel For Sell
+              </button>
+              :
+              <button id="forsell" className={`login-btn hover:bg-blue-600 focus:bg-green-700 `} onClick={putForSell} value={land.landId.toString()}>
+                Place For Sell
+              </button>
+              }
             </div>
       </div>
         
