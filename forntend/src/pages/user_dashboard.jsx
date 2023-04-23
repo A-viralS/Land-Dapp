@@ -1,51 +1,9 @@
 import {UserTopbar, Footer2, AvailableProperty, } from '../components';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from '../style';
-import Web3 from 'web3';
 import { search } from '../assets';
 
-const user_dashboard = () => {
-  const [isConnected, setIsConnected] = useState(true);
-  const [ethBalance, setEthBalance] = useState("");
-  // const [ethAccount, setEthAccount] = useState("");
-
-  const detectCurrentProvider = () =>{
-    let provider;
-    if (window.ethereum) {
-      provider = window.ethereum;
-    }
-    else if(window.web3){
-      provider = window.web3.currentProvider;
-    }
-    else{
-      alert("Non-ethereum browser detected. You should install Metamask.");
-    }
-    return provider
-  }
-
-
-  const onConnect = async() => {
-    try{
-      const currentProvider = detectCurrentProvider();
-      if(currentProvider){
-        await currentProvider.request({method: 'eth_requestAccounts'});
-        const web3 = new Web3(currentProvider);
-        const userAccount = await web3.eth.getAccounts();
-        const account = userAccount[0];
-        let ethBalance =await web3.eth.getBalance(account);
-        setEthBalance(ethBalance);
-        setIsConnected(true);
-      }
-    }
-    catch(err){
-      console.log(err);
-    }
-  }
-  const onDisconnected = () =>{
-    setIsConnected(false);
-  }
-
-  onConnect()
+const user_dashboard = ({state}) => {
 
   return (
   

@@ -1,49 +1,20 @@
 import {Topnav, Footer2,} from '../components';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from '../style';
-import Web3 from 'web3';
+import { ethers } from 'ethers';
 
-const inspector_dashboard = () => {
-  const [isConnected, setIsConnected] = useState(true);
-  const [ethBalance, setEthBalance] = useState("");
-  // const [ethAccount, setEthAccount] = useState("");
+const inspector_dashboard = ({state, account}) => {
+  const [List, setLandList] = useState([])
+  const {contract} = state;
 
-  const detectCurrentProvider = () =>{
-    let provider;
-    if (window.ethereum) {
-      provider = window.ethereum;
-    }
-    else if(window.web3){
-      provider = window.web3.currentProvider;
-    }
-    else{
-      alert("Non-ethereum browser detected. You should install Metamask.");
-    }
-    return provider
-  }
-
-  const onConnect = async() => {
-    try{
-      const currentProvider = detectCurrentProvider();
-      if(currentProvider){
-        await currentProvider.request({method: 'eth_requestAccounts'});
-        const web3 = new Web3(currentProvider);
-        const userAccount = await web3.eth.getAccounts();
-        const account = userAccount[0];
-        let ethBalance =await web3.eth.getBalance(account);
-        setEthBalance(ethBalance);
-        setIsConnected(true);
-      }
-    }
-    catch(err){
-      console.log(err);
-    }
-  }
-  const onDisconnected = () =>{
-    setIsConnected(false);
-  }
-
-  onConnect()
+  useEffect(() =>{
+    const getInspectorsDetails = async (event) => {
+      const data = await contract.getInspectors()
+      setLandList(data)
+      console.log(data)
+    };
+    contract && getInspectorsDetails()
+  }, [contract])
 
   return (
   
@@ -52,22 +23,29 @@ const inspector_dashboard = () => {
         
         <div>
             <div className={` w-full mt-[20px]`}>
-                
-                
-                <div className="w-full h-[70vh] flex t-[100px] xs:gap-36 gap-20  xs:flex-row flex-col justify-center text-center items-center">
+              {List.map((inspector) => (
+                <div>
+                   {inspector.walletAddress.toLowerCase() === ethereum.selectedAddress ?
+                  <div className="w-full h-[70vh] flex t-[100px] xs:gap-36 gap-20  xs:flex-row flex-col justify-center text-center items-center" key={Math.random()}>
                     <div className=" w-[300px] h-[150px] bg-indigo-800 items-center pt-[40px] rounded-[10px]">
                         <p className={` ${styles.paragraph}`}> Land Verified</p>
                         <h1 className="text-white font-poppins text-[24px] font-bold">
-                            0
+                        {inspector.verifiedLand.toString()}
                         </h1>
                     </div>
                     <div className=" w-[300px] h-[150px] bg-purple-800 items-center pt-[40px] rounded-[10px]">
                         <p className={` ${styles.paragraph}`}> User Verified</p>
                         <h1 className="text-white font-poppins text-[24px] font-bold">
-                            0
+                            {inspector.verifiedUser.toString()}                          
                         </h1>
                     </div>
+                  </div>
+                  :
+                  <>
+                  </>
+                  }
                 </div>
+              ))}
             </div>
         </div>
 

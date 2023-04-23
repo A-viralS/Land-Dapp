@@ -17,48 +17,52 @@ const RequestDetail = ({state}) =>{
 
   return(
     <div className="w-full mt-10">
-      {landList.map((land) => (
-        <>
-          <div className="w-full flex flex-col gap-6 items-center">
-            <div className="flex flex-col my-3 xs:w-[80%] w-[100vw] gap-y-2 xs:border-radius xs:border border-b  xs:pl-20 max-xs:px-5">
-              <div key={Math.random()}>
-                <div className={` flex flex-row items-center xs:gap-10 border-b border-cyan-900 w-[100%] xs:w-[75%] p-3`}>
-                  <div className=" font-bold text-[20px] w-[200px] ">
-                    Location
+      {landList.length === 0 ? (
+          <p className="text-[24px] text-red-700 bg-white text-center my-[100px]  w-full">You Don't Have Any Pending Land Verification.</p>
+        ) : (
+          landList.map((land) => (
+            <>
+              <div className="w-full flex flex-col gap-6 items-center">
+                <div className="flex flex-col my-3 xs:w-[80%] w-[100vw] gap-y-2 xs:border-radius xs:border border-b  xs:pl-20 max-xs:px-5">
+                  <div key={Math.random()}>
+                    <div className={` flex flex-row items-center xs:gap-10 border-b border-cyan-900 w-[100%] xs:w-[75%] p-3`}>
+                      <div className=" font-bold text-[20px] w-[200px] ">
+                        Location
+                      </div>
+                      <div className="text-[18px] font-semibold max-xs:w-fit">{land.state}, {land.city}, {land.district}</div>
+                    </div>
+    
+                    <div className={` flex flex-row items-center xs:gap-10 border-b border-cyan-900 w-[100%] xs:w-[75%] p-3`}>
+                      <div className=" font-bold text-[20px] w-[200px]">
+                      Property Number
+                      </div>
+                      <div className="text-[18px] font-semibold max-xs:w-fit">{land.propertyNumber}</div>
+                    </div>
+    
+                    <div className={` flex flex-row items-center xs:gap-10 border-b border-cyan-900 w-[100%] xs:w-[75%] p-3`}>
+                      <div className=" font-bold text-[20px] w-[200px]">
+                      Market value
+                      </div>
+                      <div className="text-[18px] font-semibold max-xs:w-fit">{land.marketValue.toString()}</div>
+                    </div>
+    
+                    <div className={` flex flex-row items-center gap-10 border-cyan-900 w-[75%] p-3 `}>
+                      <span className=" font-bold text-[20px] w-[200px]">
+                        Verified Status
+                      </span>
+                      <span className={` text-red-800 text-[20px] font-semibold `}>
+                        {land.verified.toString()} Pending
+                      </span>
+                    </div>
                   </div>
-                  <div className="text-[18px] font-semibold max-xs:w-fit">{land.state}, {land.city}, {land.district}</div>
-                </div>
-
-                <div className={` flex flex-row items-center xs:gap-10 border-b border-cyan-900 w-[100%] xs:w-[75%] p-3`}>
-                  <div className=" font-bold text-[20px] w-[200px]">
-                  Property Number
-                  </div>
-                  <div className="text-[18px] font-semibold max-xs:w-fit">0001</div>
-                </div>
-
-                <div className={` flex flex-row items-center xs:gap-10 border-b border-cyan-900 w-[100%] xs:w-[75%] p-3`}>
-                  <div className=" font-bold text-[20px] w-[200px]">
-                  Market value
-                  </div>
-                  <div className="text-[18px] font-semibold max-xs:w-fit">{land.marketValue.toString()}</div>
-                </div>
-
-                <div className={` flex flex-row items-center gap-10 border-cyan-900 w-[75%] p-3 `}>
-                  <span className=" font-bold text-[20px] w-[200px]">
-                    Status
-                  </span>
-                  <span className={` text-red-800 text-[20px] font-semibold `}>
-                    {land.verified.toString()}
-                  </span>
                 </div>
               </div>
-            </div>
-          </div>
-
-          <div className={` w-[100%] h-[1px] bg-black mt-[50px]`}>
-          </div>
-        </>
-      ))};
+    
+              <div className={` w-[100%] h-[1px] bg-black mt-[50px]`}>
+              </div>
+            </>
+          ))
+        )}
     </div>
   )
 

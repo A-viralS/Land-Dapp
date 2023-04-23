@@ -12,36 +12,41 @@ const App = () => {
     signer:null,
     contract:null
   })
-  const [account, setAccount] = useState('Not Connected')
+  const [account, setAccount] = useState("Not Connected")
 
   useEffect(()=>{
     const template=async()=>{
       // 0x5EF3a388AF7C8A152C67DbF56cDECe7fF2E76e55
       //
       // 0x693f7340f03DCeB56a4eBbf2d5946FF57111bC48
+      // Ganache delpoyment key 0x608288bD69c8FA14aA6fa380CAc7B34cfBF7C0b1
+      // Goerli new deployment key 0x51A8E56061bE5C44b014fA897C20aaC48D34623d
       const contractAddress="0x608288bD69c8FA14aA6fa380CAc7B34cfBF7C0b1";
       const contractABI=abi.abi;
 
       //Metamask Part
       //1. In order to do transactions on goerli testnet
       //Metamask consist of infura
-      try{
-        const {ethereum}=window;
-        const account = await ethereum.request({
-          method: "eth_requestAccounts"
-        })
-        window.ethereum.on("accountsChanged", ()=>{window.location.reload()})
+      try {
+        const { ethereum } = window;
+        const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+        const account = accounts[0];
+        window.ethereum.on('accountsChanged', () => {
+          window.location.reload();
+        });
         setAccount(account);
-        const provider = new ethers.providers.Web3Provider(ethereum);//read the blockchain
-        const signer = provider.getSigner();//write the blockchain
-        const contract = new ethers.Contract(contractAddress,
+        const provider = new ethers.providers.Web3Provider(ethereum);
+        const signer = provider.getSigner();
+        const contract = new ethers.Contract(
+          contractAddress,
           contractABI,
           signer
-        )
-        console.log(contract)
-        setState({provider,signer,contract});
+        );
+        console.log(contract);
+        console.log(accounts);
+        setState({ provider, signer, contract });
         // return contract.getUsers
-      }catch(error){
+      } catch (error) {
         alert(error);
       }
     }
@@ -63,12 +68,12 @@ const App = () => {
         <Route path='/property'  element={<Property state={state}/>} />
         <Route path='/requested'  element={<Requested state={state}/>} />
         <Route path='/requests'  element={<Requests state={state}/>} />
-        <Route path='/user dashboard'  element={<User_dashboard />} />
+        <Route path='/user dashboard'  element={<User_dashboard state={state}/>} />
         <Route path='/user registration'  element={<User_registration state={state}/>} />
         <Route path='/register land'  element={<Register_land state={state}/>} />
-        <Route path='/inspector dashboard'  element={<Inspector_dashboard/>} />
+        <Route path='/inspector dashboard'  element={<Inspector_dashboard state={state} account={account}/>} />
         <Route path='/verify land'  element={<Verify_land state={state}/>} />
-        <Route path='/verify user'  element={<Verify_user/>} />
+        <Route path='/verify user'  element={<Verify_user state={state}/>} />
         
         <Route path='/*'  element={<Nopage />} />
       </Routes>

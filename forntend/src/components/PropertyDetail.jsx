@@ -12,8 +12,9 @@ const PropertyDetail = ({ state }) =>{
   useEffect(() =>{
     const getLand = async (event) => {
       const data = await contract.getLands();
-      setLandList(data)
-      // console.log(data)
+      const data2 = await contract.getOwnerLands();
+      setLandList(data2)
+      console.log(data2)
     };
     contract && getLand()
 
@@ -69,11 +70,11 @@ const PropertyDetail = ({ state }) =>{
         alert("Transaction Is Successful.");
       }
       else{
-        setErrorMessage("All fields are required for registering your land");
+        setErrorMessage("All fields are required.");
       }
     } catch (error) {
-      console.log(error);
-      setErrorMessage("An error occurred while registering the land");
+      // console.log(error);
+      setErrorMessage("An error occurred while putting land for Sale");
     }
   checkForError()
   }
@@ -115,7 +116,7 @@ const PropertyDetail = ({ state }) =>{
               Property Number
             </div>
             <div className="text-[18px] font-semibold max-xs:w-fit">
-              {land.landId.toString()}
+              {land.propertyNumber}
             </div>
           </div>
 
@@ -133,7 +134,7 @@ const PropertyDetail = ({ state }) =>{
               Owner
             </div>
             <div className="text-[18px] font-semibold max-xs:w-fit">
-              {land.owner}
+              {land.verified.toString()}
             </div>
           </div>
         </div>

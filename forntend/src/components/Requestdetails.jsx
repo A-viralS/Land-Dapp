@@ -1,12 +1,15 @@
 import React from 'react'
 import { useEffect, useState } from "react";
+import ErrorMessage from "../components/ErrorMessage";
 
 
 
 const Requestdetails = ({state}) =>{
-
   const [landList, setLandList] = useState([])
   const {contract} = state;
+  const [errorMessage, setErrorMessage] = useState([]);
+  const [Empty, setisEmpty] = useState(false);
+  const [isError, setError] = useState(false);
 
   useEffect(() =>{
     const getLand = async (event) => {
@@ -16,22 +19,56 @@ const Requestdetails = ({state}) =>{
     };
     contract && getLand()
 
-
-      // event.preventDefault();
-        // try {
-        //     setLandList(data)
-        //     console.log("See Data:", data);
-        //     alert("Transaction Is Successful.");
-        //   } catch (error) {
-        //   console.log(error);
-        //   setErrorMessage("An error occurred while Getting lands");
-        // }
-      // checkForError()
-
   }, [contract])
+
+  const buyLandFromOwner = async (event) => {
+    event.preventDefault();
+    const { contract } = state;
+    const _landId = document.querySelector("#buy").value;
+
+      try {
+          console.log("Transaction Is In Progress.");
+          alert("Transaction Is In Progress.")
+          const transaction = await contract.buyLand(_landId);
+          await transaction.wait();
+          console.log("Transaction Is Successful.");
+          alert("Transaction Is Successful.");
+
+      } catch (error) {
+        // if (error.code === "UNPREDICTABLE_GAS_LIMIT") {
+          const errorMessage = error.error.data.originalError.message; // extract the error message
+          console.log(errorMessage); // log the error message to the console
+          // set the error message in state to display it to the user
+          setErrorMessage(errorMessage);
+          checkForError()
+        // }
+      }
+  };
+
+  function checkForError() {
+    if (errorMessage!=[]) {
+      setError(true);
+    }
+    setIsOpen(true);
+  }
+
+  function checkForEmpty() {
+    if (List.length === 0) {
+      setisEmpty(true);
+    } else {
+      setisEmpty(false);
+    }
+  }
+
+  const [isOpen, setIsOpen] = useState(true);
+
+  function handleClose() {
+      setIsOpen(false);
+    }
 
   return (
     <div className="w-[100vw] mt-10">
+    {isError && <ErrorMessage message={errorMessage} isOpen={isOpen} handleClose={handleClose}/>}
     {landList.map((land) => (
       <>
         {land.forSell.toString()=="true" &&
@@ -54,7 +91,7 @@ const Requestdetails = ({state}) =>{
                     Property Number
                   </div>
                   <div className="text-[18px] font-semibold max-xs:w-fit">
-                    {land.landId.toString()}
+                    {land.propertyNumber}
                   </div>
                 </div>
 
@@ -77,13 +114,12 @@ const Requestdetails = ({state}) =>{
                 </div>
               </div>
 
-                  <div className="text-[18px] font-semibold">
-                        <a href="#" className="">
-                          <button className={`login-btn hover:bg-blue-600 focus:bg-green-700 `}>
-                            Place For Sell
-                          </button>
-                        </a>
-                  </div>
+              <div className="text-[18px] font-semibold">
+                <button id="buy" onClick={buyLandFromOwner} className={`login-btn hover:bg-blue-600 focus:bg-green-700 `} value={land.landId.toString()}>
+                  Buy
+                </button>
+              </div>
+
             </div>
               
           </div>

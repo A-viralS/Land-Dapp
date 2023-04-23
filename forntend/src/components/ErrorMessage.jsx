@@ -1,13 +1,13 @@
 import React from "react";
 import { useState } from "react";
 
-function ErrorMessage({ message }) {
+function ErrorMessage({ message, handleClose, isOpen }) {
 
-    const [isOpen, setIsOpen] = useState(true);
+    // const [isOpen, setIsOpen] = useState(true);
 
-    function handleClose() {
-            setIsOpen(false);
-      }
+    // function handleClose() {
+    //         setIsOpen(false);
+    //   }
   return (
     <div className={`fixed z-10 inset-0 overflow-y-auto ${isOpen ? 'block' : 'hidden'}`}>
       <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
