@@ -15,6 +15,7 @@ import register_land from "./register_land"
 import verify_user from "./verify_user"
 import verify_land from "./verify_land"
 import inspector_dashboard from "./inspector_dashboard"
+import commissioner from "./commissioner"
 
 export {
     about as About, 
@@ -34,6 +35,7 @@ export {
     verify_user as Verify_user,
     verify_land as Verify_land,
     inspector_dashboard as Inspector_dashboard,
+    commissioner as Commissioner,
 };
 
 

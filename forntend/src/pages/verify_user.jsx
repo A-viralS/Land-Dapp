@@ -31,7 +31,7 @@ const verify_user = ({state}) =>{
       if (_userId) {
         console.log("Transaction Is In Progress.");
         alert("Transaction Is In Progress.")
-        const transaction = await contract.verifyLand(_userId);
+        const transaction = await contract.verifyUser(_userId);
         await transaction.wait();
         console.log("Transaction Is Successful.");
         alert("Transaction Is Successful.");
@@ -81,7 +81,7 @@ const verify_user = ({state}) =>{
                       <hr className="w-full  bg-black max-ss:opacity-0" />
                       </p>
                       <h3 className="p-[10px] text-center font-poppins font-normal max-ss:text-slate-500 break-all text-[16px] ss:mt-[20px]">
-                        {user.email}
+                        {user.emailAddress}
                       </h3>
         
                       </div>
@@ -117,7 +117,7 @@ const verify_user = ({state}) =>{
                     <div className="  max-ss:ml[60%] max-xs:ml-5 ml-[70%]">
                       <form onSubmit={verifyUser}>
                         <div>
-                          <button id='userid' value={user.userId}  className={`addUser-btn focus:bg-blue-300 focus:text-black max-ss:px-[40px]`}>Verify</button>
+                          <button id='userid' value={user.userId.toString()}  className={`addUser-btn focus:bg-blue-300 focus:text-black max-ss:px-[40px]`}>Verify</button>
                         </div>
                       </form>
                     </div>

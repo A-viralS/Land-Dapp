@@ -11,24 +11,12 @@ const PropertyDetail = ({ state }) =>{
 
   useEffect(() =>{
     const getLand = async (event) => {
-      const data = await contract.getLands();
+      // const data = await contract.getLands();
       const data2 = await contract.getOwnerLands();
       setLandList(data2)
       console.log(data2)
     };
     contract && getLand()
-
-
-      // event.preventDefault();
-        // try {
-        //     setLandList(data)
-        //     console.log("See Data:", data);
-        //     alert("Transaction Is Successful.");
-        //   } catch (error) {
-        //   console.log(error);
-        //   setErrorMessage("An error occurred while Getting lands");
-        // }
-      // checkForError()
 
   }, [contract])
 

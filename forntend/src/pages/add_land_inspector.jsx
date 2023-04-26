@@ -30,6 +30,7 @@ const add_land_inspector = ({state}) =>{
           await transaction.wait();
           console.log("Transaction Is Successful.");
           alert("Transaction Is Successful.");
+          setIsSubmitting(false)
         }
         else{
           setErrorMessage("All fields are required for registering your land");

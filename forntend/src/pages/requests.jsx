@@ -10,14 +10,19 @@ const requests = ({ state }) => {
   const [errorMessage, setErrorMessage] = useState("");
   const [isEmpty, setIsEmpty] = useState(false);
   const [isError, setIsError] = useState(false);
+  const [showMessage, setShowMessage] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
+
+
 
   const searchLand = async (event) => {
     event.preventDefault();
     const _search = document.querySelector("#search").value;
     if (_search) {
       const data = await contract.searchLands(_search);
+      console.log(data)
       setLandList(data);
-      checkForEmpty(data);
+      checkForEmpty();
     } else {
       setErrorMessage("City or District is Required.");
       setIsError(true);
@@ -27,21 +32,21 @@ const requests = ({ state }) => {
 
   const checkForError = () => {
     if (errorMessage !== "") {
-      setIsError(true);
+      // setIsError(true);
       setIsOpen(true);
     }
   };
 
-  const checkForEmpty = (data) => {
-    if (data.length === 0) {
+  const checkForEmpty = () => {
+    if (landList.length === 0) {
       setIsEmpty(true);
-      setTimeout(() => {
-        setShowMessage(true);
-      }, 5000);
+      setShowMessage(true);
     } else {
       setIsEmpty(false);
-      setShowMessage(false);
     }
+    setTimeout(() => {
+      setShowMessage(false);
+    }, 5000);
   };
 
   const buyLandFromOwner = async (event) => {
@@ -71,13 +76,11 @@ const requests = ({ state }) => {
     }
   };
 
-  const [isOpen, setIsOpen] = useState(true);
 
   const handleClose = () => {
     setIsOpen(false);
   };
 
-  const [showMessage, setShowMessage] = useState(false);
 
   return (
     <div className="bg-white w-full overflow-hidden h-full ">
@@ -90,16 +93,17 @@ const requests = ({ state }) => {
             handleClose={handleClose}
           />
         )}
+
         {showMessage && (
-          <div className="px-4">
-            <p className="text-red-500 font-semibold text-center py-2">
+          <div className="px-4 transition-all">
+            <p className="text-red-500 font-semibold open-sans text-[24px] text-center py-2 animate-pulse ">
               Land Not Found
             </p>
           </div>
         )}
+
         <form
-          action=""
-          method=""
+         onSubmit={searchLand} 
           className={`flex ml-[60%]  xs:${styles.flexLeft} w-[400px] flex md:ml-[70%] xs:ml-[50px] pt-[50px] max-xs:ml-[20px]`}
         >
           <div
@@ -111,12 +115,13 @@ const requests = ({ state }) => {
               className="ml-3 text-[18px] focus:outline-0 bg-transparent font-poppins"
               placeholder="Search land"
             />
-            <button onClick={searchLand}>
-              <img src={search} alt="Search" className="w-[30px] h-[30px]"/> 
+            <button type="submit">
+              <img src={search}alt="Search" className="w-[30px] h-[30px]"/> 
             </button>
           </div>
         </form>
-        {landList.length === [] ? (
+
+        {landList.length != [] ? (
             landList.map((land) => 
               (
                 <>

@@ -170,7 +170,7 @@ export const landForm = [
 
 export const ownersLinks = [
   {
-    id: "/owner dashboard",
+    id: "/commissioner",
     title: "Dashboard",
     icon: dashboard,
   },

@@ -3,7 +3,7 @@ import abi from "./contractJson/LandRegistrationSystem.json";
 import {ethers} from "ethers";
 import { useState, useEffect } from "react";
 
-import {About, Add_land_inspector, Home, Land_inspector, Land_registration,  Login, Profile, Property, Requested, Requests, User_dashboard, User_registration, Nopage, Register_land, Verify_land, Verify_user, Inspector_dashboard, } from './pages/index'
+import {About, Add_land_inspector, Home, Land_inspector, Land_registration,  Login, Profile, Property, Requested, Requests, User_dashboard, User_registration, Nopage, Register_land, Verify_land, Verify_user, Inspector_dashboard,Commissioner } from './pages/index'
 
 const App = () => {
   
@@ -19,9 +19,9 @@ const App = () => {
       // 0x5EF3a388AF7C8A152C67DbF56cDECe7fF2E76e55
       //
       // 0x693f7340f03DCeB56a4eBbf2d5946FF57111bC48
-      // Ganache delpoyment key 0x608288bD69c8FA14aA6fa380CAc7B34cfBF7C0b1
+      // Ganache delpoyment key 0x4F4E7ecBC9181e1e673F3a2557Ee24C9493c88DC
       // Goerli new deployment key 0x51A8E56061bE5C44b014fA897C20aaC48D34623d
-      const contractAddress="0x608288bD69c8FA14aA6fa380CAc7B34cfBF7C0b1";
+      const contractAddress="0x4F4E7ecBC9181e1e673F3a2557Ee24C9493c88DC";
       const contractABI=abi.abi;
 
       //Metamask Part
@@ -60,11 +60,12 @@ const App = () => {
         <Route index element={<Home />} />
         <Route path='/home'  element={<Home />}/>
         <Route path='/about'  element={<About />} />
+        <Route path='/commissioner'  element={<Commissioner state={state} />} />
         <Route path='/add land inspector'  element={<Add_land_inspector state={state} />} />
         <Route path='/land inspector'  element={<Land_inspector />} />
         <Route path='/land registration'  element={<Land_registration />} />
         <Route path='/login'  element={<Login state={state} account={account}/>} />
-        <Route path='/profile'  element={<Profile />} />
+        <Route path='/profile'  element={<Profile state={state} account={account}/>} />
         <Route path='/property'  element={<Property state={state}/>} />
         <Route path='/requested'  element={<Requested state={state}/>} />
         <Route path='/requests'  element={<Requests state={state}/>} />
