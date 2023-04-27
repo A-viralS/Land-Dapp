@@ -3,6 +3,7 @@ import * as ipfsClient from "ipfs-http-client";
 import { Buffer } from "buffer";
 import { useState } from 'react';
 import ErrorMessage from "./ErrorMessage";
+import { useNavigate } from 'react-router-dom';
 // import abi from "../contractJson/LandRegistrationSystem.json"
 // import {ethers} from "ethers"
 // import { useState, useEffect } from "react";
@@ -10,6 +11,7 @@ import ErrorMessage from "./ErrorMessage";
 // import { ethers } from 'hardhat';
 
 const UserForm = ({state}) => {
+  const navigate = useNavigate();
   const [file, setFileUrl] = useState(null);
   const [ipfsHash, setIpfsHash] = useState(localStorage.getItem("hash") ||"");
   const [errorMessage, setErrorMessage] = useState("");
@@ -82,6 +84,7 @@ const UserForm = ({state}) => {
         )
         await transaction.wait();
         console.log("Transaction Is Successful.");
+        navigate('/user dashboard', {replace: true});
         alert("Transaction Is Successful.");
       }
       else{
@@ -112,7 +115,7 @@ const UserForm = ({state}) => {
           {errorMessage && (
             <ErrorMessage message={errorMessage}/>  
           )}
-            <div className={`flex w-[80%] justify-center flex-col max-ss:items-center`}>
+            <div className={`flex w-[80%] justify-center flex-col max-ss:items-center mb-10`}>
               <div className="grid md:grid-cols-2 md:gap-x-20 gap-y-10  md:w-fit w-full justify-center ">
                 { Userform.map((Userform) =>(
                     <label
@@ -162,11 +165,11 @@ const UserForm = ({state}) => {
                 </button>
               </>
             )}
-              {ipfsHash && (
+              {/* {ipfsHash && (
                 <p className="mt-5 text-green-500 font-bold text-center">
                   Your file hash: {ipfsHash}
                 </p>
-              )}
+              )} */}
               </div>
         </form>
     </div>
