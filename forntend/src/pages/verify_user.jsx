@@ -48,7 +48,7 @@ const verify_user = ({state}) =>{
     <div className="bg-white w-full overflow-hidden h-full ">
       <Topnav/>
       <div>
-        <div className="flex justify-center my-3 ">
+        <div className="flex justify-center bg-slate-300 py-10">
           {userList.length === 0 ? (
             <p className="text-[24px] text-red-700 my-[100px]">There is no User Pending to be Verified.</p>
           ) : (

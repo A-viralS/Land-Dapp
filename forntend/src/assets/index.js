@@ -39,6 +39,10 @@ import user from "./user.png"
 import parthenon from "./parthenon.png"
 import request from "./request.png"
 import search from "./search.png"
+import slider1 from "./slider1.jpg"
+import slider2 from "./slider2.jpg"
+import slider3 from "./slider3.jpg"
+import slider4 from "./slider4.jpg"
 
 export {
   airbnb,
@@ -82,4 +86,8 @@ export {
   parthenon,
   request,
   search,
+  slider1,
+  slider2,
+  slider3,
+  slider4,
 };

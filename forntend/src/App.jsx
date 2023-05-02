@@ -47,7 +47,7 @@ const App = () => {
         setState({ provider, signer, contract });
         // return contract.getUsers
       } catch (error) {
-        alert(error);
+        console.log(error);
       }
     }
     template();

@@ -22,7 +22,7 @@ const inspector_dashboard = ({state, account}) => {
         <Topnav/>
         
         <div>
-            <div className={` w-full mt-[20px]`}>
+            <div className={` w-full bg-slate-300 py-10`}>
               {List.map((inspector) => (
                 <div>
                    {inspector.walletAddress.toLowerCase() === ethereum.selectedAddress ?

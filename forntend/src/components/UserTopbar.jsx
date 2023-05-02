@@ -7,49 +7,49 @@ import React, { useState, useEffect } from 'react';
 
     const UserTopbar = () => {
 
-      const [isConnected, setIsConnected] = useState(false);
-      const [ethBalance, setEthBalance] = useState("");
-      const [ethAccount, setEthAccount] = useState("");
+      const [isConnected, setIsConnected] = useState(true);
+      // const [ethBalance, setEthBalance] = useState("");
+      // const [ethAccount, setEthAccount] = useState("");
     
-      const detectCurrentProvider = () =>{
-        let provider;
-        if (window.ethereum) {
-          provider = window.ethereum;
-        }
-        else if(window.web3){
-          provider = window.web3.currentProvider;
-        }
-        else{
-          alert("Non-ethereum browser detected. You should install Metamask.");
-        }
-        return provider
-      }
-      const ethDetails=  () =>{
-        let ethBalance = web3.eth.getBalance(account);
-        let ethAccount =  web3.eth.getAccounts();
-        setEthBalance(ethBalance);
-        setEthAccount(ethAccount)
-        return ethBalance
-      }
+      // const detectCurrentProvider = () =>{
+      //   let provider;
+      //   if (window.ethereum) {
+      //     provider = window.ethereum;
+      //   }
+      //   else if(window.web3){
+      //     provider = window.web3.currentProvider;
+      //   }
+      //   else{
+      //     alert("Non-ethereum browser detected. You should install Metamask.");
+      //   }
+      //   return provider
+      // }
+      // const ethDetails=  () =>{
+      //   let ethBalance = web3.eth.getBalance(account);
+      //   let ethAccount =  web3.eth.getAccounts();
+      //   setEthBalance(ethBalance);
+      //   setEthAccount(ethAccount)
+      //   return ethBalance
+      // }
     
       const onConnect = async() => {
-        try{
-          const currentProvider = detectCurrentProvider();
-          if(currentProvider){
-            await currentProvider.request({method: 'eth_requestAccounts'});
-            const web3 = new Web3(currentProvider);
-            const userAccount = await web3.eth.getAccounts();
-            const account = userAccount[0];
-            let ethBalance =await web3.eth.getBalance(account);
-            let ethAccount = await web3.eth.getAccounts();
-            setEthBalance(ethBalance);
-            setEthAccount(ethAccount)
-            setIsConnected(true);
-          }
-        }
-        catch(err){
-          console.log(err);
-        }
+        // try{
+        //   const currentProvider = detectCurrentProvider();
+        //   if(currentProvider){
+        //     await currentProvider.request({method: 'eth_requestAccounts'});
+        //     const web3 = new Web3(currentProvider);
+        //     const userAccount = await web3.eth.getAccounts();
+        //     const account = userAccount[0];
+        //     let ethBalance =await web3.eth.getBalance(account);
+        //     let ethAccount = await web3.eth.getAccounts();
+        //     setEthBalance(ethBalance);
+        //     setEthAccount(ethAccount)
+            // setIsConnected(true);
+        //   }
+        // }
+        // catch(err){
+        //   console.log(err);
+        // }
 
       }
       

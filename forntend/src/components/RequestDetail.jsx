@@ -51,7 +51,7 @@ const RequestDetail = ({state}) =>{
                         Verified Status
                       </span>
                       <span className={` text-red-800 text-[20px] font-semibold `}>
-                        {land.verified.toString()} Pending
+                        Pending
                       </span>
                     </div>
                   </div>
@@ -70,3 +70,6 @@ const RequestDetail = ({state}) =>{
 
 
 export default RequestDetail
+
+
+// {land.verified.toString()} 

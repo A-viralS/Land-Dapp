@@ -20,9 +20,9 @@ const commissioner = ({state }) => {
         <Ownernav/>
         
         <div>
-          <div className="container mx-auto py-8">
-            <h2 className="text-2xl font-bold mb-8">Land Inspectors</h2>
-            <div className="bg-white rounded-lg shadow overflow-hidden">
+          <div className="flex justify-center flex-col items-center bg-slate-300 py-10">
+            <h2 className="text-2xl font-bold mb-8 ml-10 self-start">Land Inspectors</h2>
+            <div className="bg-white w-[80%] rounded-lg shadow overflow-hidden">
               <table className="w-full">
                 <thead className="bg-gray-50">
                   <tr>

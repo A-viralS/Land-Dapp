@@ -129,7 +129,7 @@ const PropertyDetail = ({ state }) =>{
 
             <div className="text-[18px] font-semibold">
               {land.forSell.toString()=="true"?
-              <button id="forsell" className={`cancel-btn hover:bg-red-400 focus:bg-blue-600 `} onClick={putNotForSell} value={land.landId.toString()}>
+              <button id="forsell" className={`add-btn hover:bg-red-500 focus:bg-blue-600 `} onClick={putNotForSell} value={land.landId.toString()}>
                 Cancel For Sell
               </button>
               :

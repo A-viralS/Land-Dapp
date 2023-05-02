@@ -31,7 +31,7 @@ const user_dashboard = ({state}) => {
     <div className="bg-white w-full overflow-hidden h-full ">
     <UserTopbar/>
     <div>
-    <div className={` w-full mt-[20px]`}>
+    <div className={` w-full bg-slate-300 py-10`}>
 {/*         
        <form action="" method="" className={` ${styles.flexCenter} xs:${styles.flexLeft} ml-5 xs:float-right xs:mr-[10%] mb-10`}>
          <div className={` flex flex-row p-[10px] border mt-5  border-slate-900`} >
