@@ -3,9 +3,9 @@ import styles from "../style"
 import { socialMedia } from "../constants"
 const Footer2 = () => (
   // ${styles.paddingY}
-  <section className={`${styles.flexCenter} flex-col `}>
-    <div className={`w-full flex justify-between items-center md:flex-row flex-col pt-6 border-t-[1px] border-t-[#3f3r45]`}>
-      <p className=" md:ml-[200px] font-poppins font-normal text-[18px] text-center leading-[27px] text-black">
+  <section className={`${styles.flexCenter} flex-col pb-5 h-[70px]`}>
+    <div className={`w-full flex justify-between items-center md:flex-row flex-col pt-6`}>
+      <p className=" md:ml-[50px] font-poppins font-normal text-[18px] text-center leading-[27px] text-white">
       &copy;  2023 Company, All Rights Reserved.
       </p>
       {/* <div className="flex flex-row  md:mt-0 mt-6 mr-[100px]" >
@@ -15,7 +15,7 @@ const Footer2 = () => (
         ))}
       </div> */}
     </div>
-
+{/* 
     <div className="h-fit max-xs:h-[30vh] w-[100%] bg-pink-300">
     <div className={` w-[100%] h-[23px] bg-green-800 mt-[0px]`}>
     </div>
@@ -67,7 +67,7 @@ const Footer2 = () => (
     </div>
     <div className={` w-[100%] h-[0px] bg-green-800 mt-[100px] max-xs:mt-[80px]`}>
     </div>
-    </div>
+    </div> */}
   </section>
 )
 

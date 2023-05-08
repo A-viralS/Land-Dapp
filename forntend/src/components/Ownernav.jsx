@@ -83,10 +83,10 @@ const Ownernav = () => {
   }, []);
 
   // Define the styles for the active and inactive links
-  const activeStyle = "text-red-700";
-  const inactiveStyle = "text-black";
+  const activeStyle = "text-secondary";
+  const inactiveStyle = "text-white";
 
-  const activeStyle_ss = "text-red-700";
+  const activeStyle_ss = "text-secondary";
   const inactiveStyle_ss = "text-white";
 
 
@@ -111,7 +111,7 @@ const Ownernav = () => {
             ))}
             <form action="login" method="">
                 <button id="meta-btn" className={` `} onClick={onDisconnected} >
-                  <p className={`meta-p pl-10`}>logout</p>
+                  <p className={`meta-p pl-10 text-gradient`}>logout</p>
                 </button>                  
             </form>
           </ul>

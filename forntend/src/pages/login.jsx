@@ -106,8 +106,8 @@ const login = ({state, account}) => {
   };
   
   return (
-    <div className="bg-primary w-full overflow-hidden">
-      <div className={`${styles.paddingX} ${styles.flexCenter}`}>
+    <div className="bg-primary w-full flex flex-col overflow-hidden">
+      <div className={`${styles.paddingX} ${styles.flexCenter} z-[5]`}>
         <div className={`${styles.boxWidth}`}>
           <Navbar />
         </div>
@@ -116,7 +116,7 @@ const login = ({state, account}) => {
       <section id='home' className={`flex flex-col items-center md:flex-row text-center mb-10`}>
         <div className={`flex flex-col ${styles.flexCenter} bg-primary ${styles.boxWidth}`}>
   
-          <div className={`flex-1 flex  ${styles.flexCenter} md:my-0 my-10 relative`}>
+          <div className={`flex-1 flex  ${styles.flexCenter} md:my-0 my-10 relative z-[]`}>
             <img src={login_image} alt="Robot Hand Image" className="w-[400px] h-[250px] relative z-[5]"/>
   
             <div className='absolute z-[0] w-[40%] h-[35%] top-0 pink__gradient'></div>

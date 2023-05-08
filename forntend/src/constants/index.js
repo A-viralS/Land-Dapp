@@ -64,18 +64,21 @@ export const topNav = [
 export const Inspectorform = [
   {
     id: "walletAddress",
+    name: "Wallet Address",
     title:"Enter Wallet Address",
     type: "text",
 
   },
   {
     id: "district",
+    name: "District",
     title:"Enter District",
     type: "text",
 
   },
   {
     id: "city",
+    name: "City",
     title:"Enter City",
     type: "text",
 
