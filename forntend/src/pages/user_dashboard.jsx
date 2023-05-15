@@ -1,7 +1,7 @@
 import { UserTopbar, Footer2, Requestdetails } from "../components";
 import { useState, useEffect } from "react";
 import styles from '../style';
-import { search } from '../assets';
+import { approve_badge } from '../assets';
 
 const user_dashboard = ({state}) => {
   const [count, setLandList] = useState([])
@@ -28,35 +28,35 @@ const user_dashboard = ({state}) => {
 
   return (
   
-    <div className="bg-white w-full overflow-hidden h-full ">
+    <div className="flex flex-col bg-primary w-full overflow-hidden h-full relative">
     <UserTopbar/>
-    <div>
-    <div className={` w-full bg-slate-300 py-10`}>
-{/*         
-       <form action="" method="" className={` ${styles.flexCenter} xs:${styles.flexLeft} ml-5 xs:float-right xs:mr-[10%] mb-10`}>
-         <div className={` flex flex-row p-[10px] border mt-5  border-slate-900`} >
-           <input type="text" className="ml-3 text-[18px] focus:outline-0 bg-transparent font-poppins" placeholder="Search land" />
-           <img src={search} alt="Search" className="h-[30px] w-[30px]" />
-         </div>
-       </form> */}
-       <div className="w-full flex t-[100px] xs:gap-36 gap-20 mt-[150px]  xs:flex-row flex-col justify-center text-center items-center">
-         <div className=" w-[300px] h-[150px] bg-green-800 items-center pt-[40px] rounded-[10px]">
-           <p className={` ${styles.paragraph}`}> Land Owned</p>
-           <h1 className="text-white font-poppins text-[24px] font-bold">
-           {count}
-           </h1>
-         </div>
-         <div className=" w-[300px] h-[150px] bg-red-800 items-center pt-[40px] rounded-[10px]">
-           <p className={` ${styles.paragraph}`}> Land Sold</p>
-           <h1 className="text-white font-poppins text-[24px] font-bold">
-             0
-           </h1>
-         </div>
-       </div>
-       <Requestdetails state={state}/>
-     </div>
+    <div className=" min-h-[77.5vh]">
+      <div className={`flex justify-center flex-col items-center relative pt-[50px]`}>
+        <div className="w-full flex t-[100px] xs:gap-36 gap-20 mt-[150px]  xs:flex-row flex-col justify-center text-center items-center z-[50]">
+          <div className=" w-[300px] h-[150px] bg-green-800 items-center pt-[40px] rounded-[10px]">
+            <p className={` ${styles.paragraph}`}> Land Owned</p>
+            <h1 className="text-white font-poppins text-[24px] font-bold">
+            {count}
+            </h1>
+          </div>
+          <div className=" w-[300px] h-[150px] bg-red-800 items-center pt-[40px] rounded-[10px]">
+            <p className={` ${styles.paragraph}`}> Land Sold</p>
+            <h1 className="text-white font-poppins text-[24px] font-bold">
+              0
+            </h1>
+          </div>
+        </div>
+        {/* <Requestdetails state={state}/> */}
+        <div className="w-[200px] h-[200px]">
+          <div className="absolute z-[1] w-[20%] h-[25%] right-0 top-0 left-30 pink__gradient"></div>
+          <div className="absolute z-[3] w-[40%] h-[40%] right-0 top-0 white__gradient"></div>
+          <div className="absolute z-[2] w-[20%] h-[20%] right-0 top-0 blue__gradient"></div>
+          <div className='absolute z-[1] w-[100vw] h-[100vh] opacity-80 right-0 top-0 bg-primary'></div>
+            <img src={approve_badge} alt="WaterMark" className="absolute opacity-10  w-[800px] h-[800px] right-0 top-0 -z-[0]"/>
+        </div>
+      </div>
     </div>
-    <div className=" bottom-0 w-full">
+    <div className=" bottom-0 w-full z-[50]">
     <Footer2/>
     </div>
   </div>

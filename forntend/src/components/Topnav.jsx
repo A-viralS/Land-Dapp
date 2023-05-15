@@ -89,7 +89,7 @@ import React, { useState, useEffect } from 'react';
     
 
   return (
-    <div>
+    <div className="z-[50]">
           <nav className='w-full flex py-6 justify-between items-center navbar'>
             <img src={logo1} alt="Logo" className='w-[100px] h-[52px]'/>
     

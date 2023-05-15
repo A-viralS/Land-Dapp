@@ -3,7 +3,7 @@ import styles from "../style"
 import { socialMedia } from "../constants"
 const Footer2 = () => (
   // ${styles.paddingY}
-  <section className={`${styles.flexCenter} flex-col pb-5 h-[70px]`}>
+  <section className={`${styles.flexCenter} flex-col pb-5 h-[70px] border-t border-t-cyan-300 border-opacity-10 `}>
     <div className={`w-full flex justify-between items-center md:flex-row flex-col pt-6`}>
       <p className=" md:ml-[50px] font-poppins font-normal text-[18px] text-center leading-[27px] text-white">
       &copy;  2023 Company, All Rights Reserved.

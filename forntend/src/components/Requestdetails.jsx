@@ -78,37 +78,37 @@ const Requestdetails = ({state}) =>{
             <div className="flex flex-col my-3 xs:w-[80%] w-[100vw] gap-y-2 xs:border-radius xs:border border-b  xs:pl-20 max-xs:px-5">
               <div key={Math.random()}>
                 <div className={` flex flex-row items-center xs:gap-10 border-b border-cyan-900 w-[100%] xs:w-[75%] p-3`}>
-                  <div className=" font-bold text-[20px] w-[200px] ">
+                  <div className=" font-bold text-[20px] w-[200px] text-secondary text-opacity-80 ">
                     Location
                   </div>
-                  <div className="text-[18px] font-semibold max-xs:w-fit">
+                  <div className="text-[18px] font-semibold max-xs:w-fit text-white">
                     {land.state}, {land.city}, {land.district}
                   </div>
                 </div>
 
                 <div className={` flex flex-row items-center xs:gap-10 border-b border-cyan-900 w-[100%] xs:w-[75%] p-3`}>
-                  <div className=" font-bold text-[20px] w-[200px]">
+                  <div className=" font-bold text-[20px] w-[200px] text-secondary text-opacity-80">
                     Property Number
                   </div>
-                  <div className="text-[18px] font-semibold max-xs:w-fit">
+                  <div className="text-[18px] font-semibold max-xs:w-fit text-white">
                     {land.propertyNumber}
                   </div>
                 </div>
 
                 <div className={` flex flex-row items-center xs:gap-10 border-b border-cyan-900 w-[100%] xs:w-[75%] p-3`}>
-                  <div className=" font-bold text-[20px] w-[200px]">
+                  <div className=" font-bold text-[20px] w-[200px] text-secondary text-opacity-80">
                     Market value
                   </div>
-                  <div className="text-[18px] font-semibold max-xs:w-fit">
+                  <div className="text-[18px] font-semibold max-xs:w-fit text-white">
                     {land.marketValue.toString()}
                   </div>
                 </div>
 
                 <div className={` flex flex-row items-center xs:gap-10 border-b border-cyan-900 w-[100%] xs:w-[75%] p-3`}>
-                  <div className=" font-bold text-[20px] w-[200px]">
+                  <div className=" font-bold text-[20px] w-[200px] text-secondary text-opacity-80">
                     Owner
                   </div>
-                  <div className="text-[18px] font-semibold max-xs:w-fit">
+                  <div className="text-[18px] font-semibold max-xs:w-fit text-white">
                     {land.owner}
                   </div>
                 </div>
@@ -122,8 +122,6 @@ const Requestdetails = ({state}) =>{
 
             </div>
               
-          </div>
-          <div className={` w-[100%] h-[1px] bg-black mt-[50px]`}>
           </div>
         </>
       }

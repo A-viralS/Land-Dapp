@@ -1,6 +1,6 @@
 import { UserTopbar, Footer2, Requestdetails } from "../components";
 import styles from "../style";
-import { search } from "../assets";
+import { search, approve_badge } from "../assets";
 import { useEffect, useState } from "react";
 import ErrorMessage from "../components/ErrorMessage";
 
@@ -38,15 +38,15 @@ const requests = ({ state }) => {
   };
 
   const checkForEmpty = () => {
-    if (landList.length === 0) {
+    if (landList.length===0) {
       setIsEmpty(true);
       setShowMessage(true);
+      setTimeout(() => {
+        setShowMessage(false);
+      }, 5000);
     } else {
       setIsEmpty(false);
     }
-    setTimeout(() => {
-      setShowMessage(false);
-    }, 5000);
   };
 
   const buyLandFromOwner = async (event) => {
@@ -83,130 +83,140 @@ const requests = ({ state }) => {
 
 
   return (
-    <div className="bg-white w-full overflow-hidden h-full ">
+    <div className="bg-primary w-full overflow-hidden h-full relative">
       <UserTopbar />
-      <div className={` w-full bg-slate-300 flex flex-col`}>
-        {isError && (
-          <ErrorMessage
-            message={errorMessage}
-            isOpen={isOpen}
-            handleClose={handleClose}
-          />
-        )}
-
-        {showMessage && (
-          <div className="px-4 transition-all">
-            <p className="text-red-500 font-semibold open-sans text-[24px] text-center py-2 animate-pulse ">
-              Land Not Found
-            </p>
-          </div>
-        )}
-
-        <form
-         onSubmit={searchLand} 
-          className={`flex ml-[60%]  xs:${styles.flexLeft} w-[400px] flex md:ml-[70%] xs:ml-[50px] pt-[50px] max-xs:ml-[20px]`}
-        >
-          <div
-            className={` flex flex-row p-[10px] border mt-5 border-gray-900`}
-          >
-            <input
-              type="text"
-              id="search"
-              className="ml-3 text-[18px] focus:outline-0 bg-transparent font-poppins"
-              placeholder="Search land"
+      <div className="flex flex-col w-full py-10 relative min-h-[77.5vh]">
+        <div className={` w-full flex flex-col z-[50]`}>
+          {isError && (
+            <ErrorMessage
+              message={errorMessage}
+              isOpen={isOpen}
+              handleClose={handleClose}
             />
-            <button type="submit">
-              <img src={search}alt="Search" className="w-[30px] h-[30px]"/> 
-            </button>
-          </div>
-        </form>
+          )}
 
-        {landList.length != [] ? (
-            landList.map((land) => 
-              (
-                <>
-                  <div className=" flex flex-col gap-0 items-center">
-                    
-                    <div className="flex flex-col my-3 xs:w-[80%] w-[100vw] gap-y-2 xs:border-radius xs:border border-b  xs:pl-20 max-xs:px-5">
-                      <div key={Math.random()}>
-                        <div className={` flex flex-row items-center xs:gap-10 border-b border-cyan-900 w-[100%] xs:w-[75%] p-3`}>
-                          <div className=" font-bold text-[20px] w-[200px] ">
-                            Location
-                          </div>
-                          <div className="text-[18px] font-semibold max-xs:w-fit">
-                            {land.state}, {land.city}, {land.district}
-                          </div>
-                        </div>
-      
-                        <div className={` flex flex-row items-center xs:gap-10 border-b border-cyan-900 w-[100%] xs:w-[75%] p-3`}>
-                          <div className=" font-bold text-[20px] w-[200px]">
-                            Property Number
-                          </div>
-                          <div className="text-[18px] font-semibold max-xs:w-fit">
-                            {land.landId.toString()}
-                          </div>
-                        </div>
-      
-                        <div className={` flex flex-row items-center xs:gap-10 border-b border-cyan-900 w-[100%] xs:w-[75%] p-3`}>
-                          <div className=" font-bold text-[20px] w-[200px]">
-                            Market value
-                          </div>
-                          <div className="text-[18px] font-semibold max-xs:w-fit">
-                            {land.marketValue.toString()}
-                          </div>
-                        </div>
-      
-                        <div className={` flex flex-row items-center xs:gap-10 border-b border-cyan-900 w-[100%] xs:w-[75%] p-3`}>
-                          <div className=" font-bold text-[20px] w-[200px]">
-                            Owner
-                          </div>
-                          <div className="text-[18px] font-semibold max-xs:w-fit">
-                            {land.owner}
-                          </div>
-                        </div>
-  
-                        <div className={` flex flex-row items-center xs:gap-10 border-b border-cyan-900 w-[100%] xs:w-[75%] p-3`}>
-                          <div className=" font-bold text-[20px] w-[200px]">
-                            Status
-                          </div>
-                          <div className="text-[18px] font-semibold max-xs:w-fit">
-                            {land.forSell.toString()=="true" ?
-                            <>
-                            <div className="text-[18px] font-semibold">
-                              <button id="buy" onClick={buyLandFromOwner} className={`login-btn hover:bg-blue-600 focus:bg-green-700 `} value={land.landId.toString()}>
-                                Buy
-                              </button>
-                            </div>
-                            </>
-                            :
-                            <>
-                              <p className="text-red-500 font-semibold text-center py-2">
-                                Not For Sell
-                              </p>
-                            </>
-                            }
-                          </div>
-                        </div>
-  
-                      </div>
-                    </div>
+          {showMessage && (
+            <div className="px-4 transition-all">
+              <p className="text-red-500 font-semibold open-sans text-[24px] text-center py-2 animate-pulse ">
+                Land Not Found
+              </p>
+            </div>
+          )}
+
+          <form
+          onSubmit={searchLand} 
+            className={`flex ml-[60%]  xs:${styles.flexLeft} w-[400px] flex md:ml-[70%] xs:ml-[50px] pt-[50px] max-xs:ml-[20px]`}
+          >
+            <div
+              className={` flex flex-row p-[10px] border mt-5 border-gray-900`}
+            >
+              <input
+                type="text"
+                id="search"
+                className="ml-3 text-[18px] focus:outline-0 bg-transparent font-poppins"
+                placeholder="Search land"
+              />
+              <button type="submit">
+                <img src={search}alt="Search" className="w-[30px] h-[30px]"/> 
+              </button>
+            </div>
+          </form>
+
+          {landList.length != [] ? (
+              landList.map((land) => 
+                (
+                  <>
+                    <div className=" flex flex-col gap-0 items-center">
                       
-                  </div>
-                  <div className={` w-[100%] h-[1px] bg-black mt-[50px]`}>
-                  </div>
-                </>
-                )
-            )
-          ) : (
-            <Requestdetails state={state}/>
-        )}
+                      <div className="flex flex-col my-3 xs:w-[80%] w-[100vw] gap-y-2 xs:border-radius xs:border border-b  xs:pl-20 max-xs:px-5">
+                        <div key={Math.random()}>
+                          <div className={` flex flex-row items-center xs:gap-10 border-b border-cyan-900 w-[100%] xs:w-[75%] p-3`}>
+                            <div className=" font-bold text-[20px] w-[200px]  text-secondary text-opacity-80">
+                              Location
+                            </div>
+                            <div className="text-[18px] font-semibold max-xs:w-fit text-white">
+                              {land.state}, {land.city}, {land.district}
+                            </div>
+                          </div>
+        
+                          <div className={` flex flex-row items-center xs:gap-10 border-b border-cyan-900 w-[100%] xs:w-[75%] p-3`}>
+                            <div className=" font-bold text-[20px] w-[200px] text-secondary text-opacity-80">
+                              Property Number
+                            </div>
+                            <div className="text-[18px] font-semibold max-xs:w-fit text-white">
+                              {land.landId.toString()}
+                            </div>
+                          </div>
+        
+                          <div className={` flex flex-row items-center xs:gap-10 border-b border-cyan-900 w-[100%] xs:w-[75%] p-3`}>
+                            <div className=" font-bold text-[20px] w-[200px] text-secondary text-opacity-80">
+                              Market value
+                            </div>
+                            <div className="text-[18px] font-semibold max-xs:w-fit text-white">
+                              {land.marketValue.toString()}
+                            </div>
+                          </div>
+        
+                          <div className={` flex flex-row items-center xs:gap-10 border-b border-cyan-900 w-[100%] xs:w-[75%] p-3`}>
+                            <div className=" font-bold text-[20px] w-[200px] text-secondary text-opacity-80">
+                              Owner
+                            </div>
+                            <div className="text-[18px] font-semibold max-xs:w-fit text-white">
+                              {land.owner}
+                            </div>
+                          </div>
+    
+                          <div className={` flex flex-row items-center xs:gap-10 border-b border-cyan-900 w-[100%] xs:w-[75%] p-3`}>
+                            <div className=" font-bold text-[20px] w-[200px] text-secondary text-opacity-80">
+                              Status
+                            </div>
+                            <div className="text-[18px] font-semibold max-xs:w-fit text-white">
+                              {land.forSell.toString()=="true" ?
+                              <>
+                              <div className="text-[18px] font-semibold">
+                                <button id="buy" onClick={buyLandFromOwner} className={`login-btn hover:bg-blue-600 focus:bg-green-700 `} value={land.landId.toString()}>
+                                  Buy
+                                </button>
+                              </div>
+                              </>
+                              :
+                              <>
+                                <p className="text-red-500 font-semibold text-center py-2">
+                                  Not For Sell
+                                </p>
+                              </>
+                              }
+                            </div>
+                          </div>
+    
+                        </div>
+                      </div>
+                        
+                    </div>
+                    <div className={` w-[100%] h-[1px] bg-black mt-[50px]`}>
+                    </div>
+                  </>
+                  )
+              )
+            ) : (
+              <Requestdetails state={state}/>
+          )}
 
-          
+            
+        </div>
+        <div className="w-[200px] h-[200px]">
+          <div className="absolute z-[2] w-[20%] h-[25%] opacity-50 right-0 top-0 left-30 pink__gradient"></div>
+          <div className="absolute z-[1] w-[40%] h-[40%] opacity-50 right-0 top-0 white__gradient"></div>
+          <div className="absolute z-[3] w-[20%] h-[20%] right-0 top-0 blue__gradient"></div>
+          <div className='absolute z-[1] w-[100vw] h-full opacity-80 right-0 top-0 bg-primary'></div>
+            <img src={approve_badge} alt="WaterMark" className="absolute opacity-10  w-[800px] h-full right-0 top-0 -z-[0]"/>
+        </div>
+      </div>
+
+      <div className=" bottom-0 w-full z-[50]">
+      <Footer2/>
+      </div>
     </div>
-    <div className=" bottom-0 w-full">
-    <Footer2/>
-    </div>
-  </div>
   );
 };
 

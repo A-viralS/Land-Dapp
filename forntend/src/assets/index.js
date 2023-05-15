@@ -43,6 +43,7 @@ import slider1 from "./slider1.jpg"
 import slider2 from "./slider2.jpg"
 import slider3 from "./slider3.jpg"
 import slider4 from "./slider4.jpg"
+import approve_badge from "./approve_badge.png"
 
 export {
   airbnb,
@@ -90,4 +91,5 @@ export {
   slider2,
   slider3,
   slider4,
+  approve_badge,
 };

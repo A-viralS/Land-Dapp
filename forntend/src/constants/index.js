@@ -86,36 +86,42 @@ export const Inspectorform = [
 ];
 export const Userform = [
   {
+    name: "Email Address",
     id: "emailAddress",
     title:"Enter Email Address",
     type: "email",
 
   },
   {
+    name: "First Name",
     id: "firstName",
     title:"Enter First Name",
     type: "text",
 
   },
   {
+    name: "Last Name",
     id: "lastName",
     title:"Enter Last Name",
     type: "text",
 
   },
   {
+    name: "Contact",
     id: "contact",
     title:"Enter Contact",
     type: "phone",
 
   },
   {
+    name: "Residential Address",
     id: "residentialAddress",
     title:"Enter Residential Address",
     type: "address",
 
   },
   {
+    name: "Ghana Card",
     id: "ghanaCard",
     title:"Upload Ghana Card",
     type: "file",

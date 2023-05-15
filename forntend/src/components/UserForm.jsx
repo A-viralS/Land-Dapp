@@ -105,7 +105,7 @@ const UserForm = ({state}) => {
   }
 
   return (
-    <div className="justify-center items-center bg-slate-200 flex">
+    <div className="justify-center items-center z-[50]">
         <form action="" method="" onSubmit={registerUser} className=" mt-[50px] flex flex-col w-full items-center">
         {isError && 
           <>
@@ -121,9 +121,9 @@ const UserForm = ({state}) => {
                     <label
                     htmlFor={Userform.id}
                     key={Userform.id}
-                    className="text-left text-gray-800 md:w-fit w-full flex flex-col text-[18px] font-poppins"
+                    className="text-left text-gray-600 md:w-fit w-full flex flex-col text-[18px] font-poppins"
                     >
-                    {Userform.id}
+                    {Userform.name}
                     {Userform.type === "file" ? (
                       <input
                         type={Userform.type}
@@ -131,7 +131,7 @@ const UserForm = ({state}) => {
                         id={Userform.id}
                         onChange={handleFileChange}
                         placeholder={Userform.title}
-                        className="text-black p-2 border border-radius border-blue-500 text-[18px] font-poppins letterSpacing md:w-[400px] ss:w-[50vw] w-[70vw] focus:outline-0"
+                        className="text-black bg-sky-200 p-2 border border-radius border-blue-500 text-[18px] font-poppins letterSpacing md:w-[400px] ss:w-[50vw] w-[70vw] focus:outline-0"
                       />
                     ) : (
                       <input
@@ -139,7 +139,7 @@ const UserForm = ({state}) => {
                         placeholder={Userform.title}
                         id={Userform.id}
                         onSubmit={handleSubmit}
-                        className="text-black p-2 border border-radius border-blue-500 text-[18px] font-poppins letterSpacing md:w-[400px] ss:w-[50vw] w-[70vw] focus:outline-0"
+                        className="text-black bg-sky-100 p-2 border border-radius border-blue-500 text-[18px] font-poppins letterSpacing md:w-[400px] ss:w-[50vw] w-[70vw] focus:outline-0"
                       />
                     )}
                   </label>

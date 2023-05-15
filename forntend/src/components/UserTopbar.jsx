@@ -81,8 +81,8 @@ import React, { useState, useEffect } from 'react';
       }, []);
     
       // Define the styles for the active and inactive links
-      const activeStyle = "text-red-700";
-      const inactiveStyle = "text-black";
+      const activeStyle = "text-gradient";
+      const inactiveStyle = "text-white";
     
 
       return (
@@ -106,7 +106,7 @@ import React, { useState, useEffect } from 'react';
               ))}
               <form action="login" method="">
                   <button id="meta-btn" className={` `} onClick={onDisconnected} >
-                    <p className={`meta-p pl-10`}>logout</p>
+                    <p className={`meta-p pl-10 text-white`}>logout</p>
                   </button>                  
               </form>
             </ul>
