@@ -220,10 +220,10 @@ export const navLinks = [
     id: "/login",
     title: "Login",
   },
-  {
-    id: "/team",
-    title: "Team",
-  },
+  // {
+  //   id: "/team",
+  //   title: "Team",
+  // },
 ];
 
 export const features = [

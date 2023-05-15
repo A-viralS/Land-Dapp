@@ -44,7 +44,7 @@ const add_land_inspector = ({ state }) => {
   };
 
   return(
-    <div className="bg-gray-800">
+    <div className="bg-primary relative">
       <Ownernav/>
       <div className='flex flex-col bg-gray-900 md:my-0 my-10 relative' >
       {isError && (
@@ -58,7 +58,7 @@ const add_land_inspector = ({ state }) => {
                 { Inspectorform.map((Userform, index) =>(
                   <label htmlFor={Userform.id} className="text-left text-gray-300 md:w-fit w-full flex flex-col  text-[18px] font-poppins">
                     {Userform.name}
-                    <input type={Userform.type} placeholder={Userform.title} id={Userform.id} className=" text-gray-4200 p-2  border border-radius border-blue-500 text-[18px] font-poppins letterSpacing md:w-[400px] ss:w-[50vw] w-[70vw] focus:outline-0 bg-gray-700" />
+                    <input type={Userform.type} placeholder={Userform.title} id={Userform.id} className=" text-gray-4200 p-2  border border-radius border-blue-500 text-[18px] font-poppins letterSpacing md:w-[400px] ss:w-[50vw] w-[70vw] focus:outline-0 bg-sky-100" />
                   </label>
                 ))}
               </div>
@@ -85,13 +85,13 @@ const add_land_inspector = ({ state }) => {
         </div>
         <div className='w-[200px] h-[200px]'>
           <div className='absolute z-[1] w-[20%] h-[25%] right-0 top-0 left-30 pink__gradient'></div>
-          <div className='absolute z-[3] w-[40%] h-[40%] right-0 top-0 white__gradient'></div>
-          <div className='absolute z-[2] w-[20%] h-[20%] right-0 top-0 blue__gradient'></div>
-          <div className='absolute z-[1] w-[100%] h-[100%] opacity-80 right-0 top-0 bg-gray-900'></div>
-          <img src={logo1} alt="WaterMark" className="absolute opacity-5 w-full h-full top-0 -z-[0]"/>
-        </div>
+            <div className='absolute z-[3] w-[40%] h-[40%] right-0 top-0 white__gradient'></div>
+            <div className='absolute z-[2] w-[20%] h-[20%] right-0 top-0 blue__gradient'></div>
+            <div className='absolute z-[1] w-[100%] h-[100%] opacity-80 right-0 top-0 bg-primary'></div>
+            <img src={logo1} alt="WaterMark" className="absolute opacity-5  w-full h-full top-0 -z-[0]"/>
+          </div>
       </div>
-      <div className=" bottom-0 w-full">
+      <div className=" bottom-0 w-full z-[50]">
         <Footer2/>
       </div>
     </div>
