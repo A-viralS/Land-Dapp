@@ -1,6 +1,7 @@
 import { Footer2, Topnav, } from '../components'
 import { useEffect, useState, React } from "react";
 import ErrorMessage from "../components/ErrorMessage";
+import {logo1} from "../assets"
 
 const verify_user = ({state}) =>{
   const [userList, setUserList] = useState([])
@@ -45,16 +46,16 @@ const verify_user = ({state}) =>{
   
   
   return (
-    <div className="bg-white w-full overflow-hidden h-full ">
+    <div className="bg-primary w-full overflow-hidden h-full ">
       <Topnav/>
-      <div>
-        <div className="flex justify-center bg-slate-300 py-10">
+      <div className="min-h-[77.5vh]">
+        <div className="flex justify-center flex-col items-center relative pt-[50px]">
           {userList.length === 0 ? (
-            <p className="text-[24px] text-red-700 my-[100px]">There is no User Pending to be Verified.</p>
+            <p className="text-[24px] text-gradient my-[100px] z-[50]">There is no User Pending to be Verified.</p>
           ) : (
             userList.map((user)=>(
               <>
-                <div className="flex border-gray-400 border w-[90%] max-ss:w-[70%] max-xs:w-[85%] flex-col my-10">
+                <div className="flex border-gray-400 border w-[90%] max-ss:w-[70%] max-xs:w-[85%] flex-col my-10 z-[50]">
                   <div>
                     <h1 className=" max-ss:ml-[40%] ml-[40px]">User Details</h1>
                   </div>
@@ -126,6 +127,13 @@ const verify_user = ({state}) =>{
               </>
             ))
           )}
+          <div className="w-[200px] h-[200px]">
+            <div className="absolute z-[1] w-[20%] h-[25%] right-0 top-0 left-30 pink__gradient"></div>
+            <div className="absolute z-[3] w-[40%] h-[40%] right-0 top-0 white__gradient"></div>
+            <div className="absolute z-[2] w-[20%] h-[20%] right-0 top-0 blue__gradient"></div>
+            <div className='absolute z-[1] w-[100%] h-[100%] opacity-80 right-0 top-0 bg-primary'></div>
+            <img src={logo1} alt="WaterMark" className="absolute opacity-5  w-full h-full top-0 -z-[0]"/>
+          </div>
         </div>
       </div>
       <div className=" bottom-0 w-full">

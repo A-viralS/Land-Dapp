@@ -81,10 +81,10 @@ import React, { useState, useEffect } from 'react';
       }, []);
     
       // Define the styles for the active and inactive links
-      const activeStyle = "text-red-700";
-      const inactiveStyle = "text-black";
+      const activeStyle = "text-secondary";
+      const inactiveStyle = "text-white";
 
-      const activeStyle_ss = "text-red-700";
+      const activeStyle_ss = "text-secondary";
       const inactiveStyle_ss = "text-white";
     
 
@@ -96,7 +96,7 @@ import React, { useState, useEffect } from 'react';
             <ul className='list-none sm:flex hidden justify-end items-center flex-1 mr-10'>
               { inspectorLinks.map((nav, index) =>(
                 <li 
-                  key={nav.id} className={`font-poppins font-normal cursor-pointer  text-[16px] ${index === inspectorLinks.length-1 ? 'mr-0' : 'mr-20'} active:text-secondary text-black`}
+                  key={nav.id} className={`font-poppins font-normal cursor-pointer  text-[16px] ${index === inspectorLinks.length-1 ? 'mr-0' : 'mr-20'} active:text-secondary text-white `}
                 >
                   <Link
                     to={nav.id}
@@ -109,7 +109,7 @@ import React, { useState, useEffect } from 'react';
               ))}
               <form action="login" method="">
                   <button id="meta-btn" className={` `} onClick={onDisconnected} >
-                    <p className={`meta-p pl-10`}>logout</p>
+                    <p className={`meta-p pl-10 text-white`}>logout</p>
                   </button>                  
               </form>
             </ul>
@@ -141,7 +141,7 @@ import React, { useState, useEffect } from 'react';
                   ))}
                   <form action="login" method="">
                       <button id="meta-btn" className={`text-white mt-10 `} onClick={onDisconnected} >
-                        <p className={`meta-p pl-10`}>logout</p>
+                        <p className={`meta-p pl-10 text-white`}>logout</p>
                       </button>                  
                   </form>
                 </ul>

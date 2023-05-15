@@ -2,6 +2,7 @@ import {Topnav, Footer2,} from '../components';
 import { useState, useEffect } from "react";
 import styles from '../style';
 import { ethers } from 'ethers';
+import { logo1 } from '../assets';
 
 const inspector_dashboard = ({state, account}) => {
   const [List, setLandList] = useState([])
@@ -18,15 +19,15 @@ const inspector_dashboard = ({state, account}) => {
 
   return (
   
-    <div className="bg-white w-full overflow-hidden h-full ">
+    <div className="bg-primary w-full overflow-hidden h-full ">
         <Topnav/>
         
         <div>
-            <div className={` w-full bg-slate-300 py-10`}>
+            <div className={` w-full py-10 relative`}>
               {List.map((inspector) => (
-                <div>
+                <div className=" min-h-[20.4vh]">
                    {inspector.walletAddress.toLowerCase() === ethereum.selectedAddress ?
-                  <div className="w-full h-[70vh] flex t-[100px] xs:gap-36 gap-20  xs:flex-row flex-col justify-center text-center items-center" key={Math.random()}>
+                  <div className="w-full flex top-[200px] xs:gap-36 gap-20  xs:flex-row flex-col justify-center text-center items-center z-[10] absolute" key={Math.random()}>
                     <div className=" w-[300px] h-[150px] bg-indigo-800 items-center pt-[40px] rounded-[10px]">
                         <p className={` ${styles.paragraph}`}> Land Verified</p>
                         <h1 className="text-white font-poppins text-[24px] font-bold">
@@ -46,6 +47,13 @@ const inspector_dashboard = ({state, account}) => {
                   }
                 </div>
               ))}
+              <div className='w-[200px] h-[200px]'>
+              <div className='absolute z-[1] w-[20%] h-[25%] right-0 top-0 left-30 pink__gradient'></div>
+                <div className='absolute z-[3] w-[40%] h-[40%] right-0 top-0 white__gradient'></div>
+                <div className='absolute z-[2] w-[20%] h-[20%] right-0 top-0 blue__gradient'></div>
+                <div className='absolute z-[1] w-[100%] h-[100%] opacity-80 right-0 top-0 bg-primary'></div>
+                <img src={logo1} alt="WaterMark" className="absolute opacity-5  w-full h-full top-0 -z-[0]"/>
+              </div>
             </div>
         </div>
 
