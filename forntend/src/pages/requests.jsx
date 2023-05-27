@@ -1,10 +1,12 @@
 import { UserTopbar, Footer2, Requestdetails } from "../components";
 import styles from "../style";
+import { ethers } from "ethers";
 import { search, approve_badge } from "../assets";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import ErrorMessage from "../components/ErrorMessage";
 
 const requests = ({ state }) => {
+  const AppContext = React.createContext({});
   const [landList, setLandList] = useState([]);
   const { contract } = state;
   const [errorMessage, setErrorMessage] = useState("");
@@ -49,22 +51,53 @@ const requests = ({ state }) => {
     }
   };
 
+
+
   const buyLandFromOwner = async (event) => {
     event.preventDefault();
     const _landId = document.querySelector("#buy").value;
-
     try {
       if (_landId) {
-        console.log("Transaction Is In Progress.");
-        alert("Transaction Is In Progress.");
-        const transaction = await contract.buyLand(_landId);
+        console.log("Transaction is in progress.");
+        alert("Transaction is in progress.");
+  
+        // Get the marketValue of the land
+        console.log(_landId);
+        const land = landList.find((land) => land.landId.toString() === _landId);
+        const marketValue = land.marketValue;
+  
+        // Convert marketValue from cedis to Ether using the exchange rate
+        const exchangeRate = 0.00005; // Replace with the actual exchange rate
+        const ether = marketValue * exchangeRate;
+  
+        // Send the transaction with the value in Ether
+        const transaction = await contract.buyLand(_landId, {
+          value: ethers.utils.parseEther(String(ether)),
+          gasLimit: 200000, // Replace with an appropriate gas limit
+        });
+  
         await transaction.wait();
-        console.log("Transaction Is Successful.");
-        alert("Transaction Is Successful.");
+  
+        // Check if the transaction was successful
+        console.log("Ownership of the land has been transferred.");
+        alert("Ownership of the land has been transferred.");
+        // if (transaction.status === 1) {
+        //   console.log("Transaction is successful.");
+        //   alert("Transaction is successful.");
+  
+        //   // Transfer ownership of the land
+        //   await contract.buyLand(_landId).send({
+        //     from: accounts[0],
+        //     gas: 200000, // Replace with an appropriate gas limit
+        //   });
+  
+          
+        // } else {
+        //   console.log("Transaction failed.");
+        //   alert("Transaction failed.");
+        // }
       } else {
-        setErrorMessage(
-          "All fields are required for registering your land"
-        );
+        setErrorMessage("Transaction failed.");
         setIsError(true);
         setIsOpen(true);
       }
@@ -75,6 +108,7 @@ const requests = ({ state }) => {
       setIsOpen(true);
     }
   };
+  
 
 
   const handleClose = () => {
@@ -174,9 +208,12 @@ const requests = ({ state }) => {
                               {land.forSell.toString()=="true" ?
                               <>
                               <div className="text-[18px] font-semibold">
-                                <button id="buy" onClick={buyLandFromOwner} className={`login-btn hover:bg-blue-600 focus:bg-green-700 `} value={land.landId.toString()}>
-                                  Buy
-                                </button>
+                                <form action="" onSubmit={buyLandFromOwner}>
+                                  <button id="buy" className={`login-btn hover:bg-blue-600 focus:bg-green-700 `} value={land.landId.toString()}>
+                                    Buy
+                                  </button>
+
+                                </form>
                               </div>
                               </>
                               :
@@ -199,7 +236,8 @@ const requests = ({ state }) => {
                   )
               )
             ) : (
-              <Requestdetails state={state}/>
+              // <Requestdetails state={state}/>
+              <h1>hi</h1>
           )}
 
             
@@ -221,3 +259,40 @@ const requests = ({ state }) => {
 };
 
 export default requests
+
+
+// const buyLandFromOwner = async (event) => {
+//   event.preventDefault();
+//   const _landId = document.querySelector("#buy").value;
+
+//   const convertToEther = (ghanaCedis) => {
+//     const ether = ghanaCedis * conversionRate;
+//     return ether;
+//   };
+
+//   const valueInWei = web3.utils.toWei(val, "ether");
+//   try {
+//     if (_landId) {
+//       console.log("Transaction Is In Progress.");
+//       alert("Transaction Is In Progress.");
+//       const transaction = await contract.buyLand(_landId);
+//       console.log("hello")
+//       await transaction.wait();
+//       console.log("Transaction Is Successful.");
+//       alert("Transaction Is Successful.");
+//     } else {
+//       setErrorMessage(
+//         "All fields are required for registering your land"
+//       );
+//       setIsError(true);
+//       setIsOpen(true);
+//     }
+//   } catch (error) {
+//     console.log(error);
+//     setErrorMessage(error.reason);
+//     setIsError(true);
+//     setIsOpen(true);
+//   }
+// };
+
+  

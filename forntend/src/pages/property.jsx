@@ -25,7 +25,7 @@ const property = ({state}) =>{
           <div className="absolute z-[2] w-[20%] h-[25%] opacity-50 right-0 top-0 left-30 pink__gradient"></div>
           <div className="absolute z-[1] w-[40%] h-[40%] opacity-50 right-0 top-0 white__gradient"></div>
           <div className="absolute z-[3] w-[20%] h-[20%] right-0 top-0 blue__gradient"></div>
-          <div className='absolute z-[1] w-[100vw] h-full opacity-80 right-0 top-0 bg-primary'></div>
+          <div className='absolute z-[1] w-full h-full opacity-80 right-0 top-0 bg-primary'></div>
             <img src={approve_badge} alt="WaterMark" className="absolute opacity-10  w-[800px] h-[800px] right-0 top-0 -z-[0]"/>
         </div>
       </div>

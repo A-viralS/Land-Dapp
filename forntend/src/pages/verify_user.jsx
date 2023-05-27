@@ -57,18 +57,18 @@ const verify_user = ({state}) =>{
               <>
                 <div className="flex border-gray-400 border w-[90%] max-ss:w-[70%] max-xs:w-[85%] flex-col my-10 z-[50]">
                   <div>
-                    <h1 className=" max-ss:ml-[40%] ml-[40px]">User Details</h1>
+                    <h1 className=" max-ss:ml-[40%] ml-[40px] text-gradient">User Details</h1>
                   </div>
         
                   <div className={`flex flex-row ss:p-[20px] py-[20px] ss:gap-[10%] items-center  max-xs:my-4 max-ss:flex-col`}>
         
                     <div className="justify-center items-center ss:w-[15%] w-full">
                       <div className=" max-ss:border-b border-black max-ss:w-[100%] flex max-ss:flex-row flex-col justify-left ">
-                      <p className="p-[10px] text-center max-ss:text-slate-900 max-ss:ml-[40px]">
+                      <p className="p-[10px] text-center max-ss:text-slate-900 max-ss:ml-[40px] text-secondary">
                         Name
-                      <hr className="w-full  bg-black max-ss:opacity-0" />
+                      <hr className="w-full  bg-white opacity-50 max-ss:opacity-0" />
                       </p>
-                      <h3 className="p-[10px] text-center font-poppins font-normal max-ss:text-slate-500 max-md:text-[14px] break-all text-[16px] ss:mt-[20px]">
+                      <h3 className="p-[10px] text-center font-poppins font-normal max-ss:text-slate-400 text-white break-words max-md:text-[14px] break-all text-[16px] ss:mt-[20px]">
                         {user.firstName} {user.lastName}
                       </h3>
         
@@ -77,11 +77,11 @@ const verify_user = ({state}) =>{
         
                     <div className="justify-center items-center ss:w-[15%] w-full flex-wrap ">
                       <div className=" max-ss:border-b border-black max-ss:w-[100%] flex max-ss:flex-row flex-col justify-left ">
-                      <p className="p-[10px] text-center max-ss:text-slate-900 max-ss:ml-[40px]">
+                      <p className="p-[10px] text-center max-ss:text-slate-900 max-ss:ml-[40px] text-secondary">
                         Email
-                      <hr className="w-full  bg-black max-ss:opacity-0" />
+                      <hr className="w-full  bg-white opacity-50 max-ss:opacity-0" />
                       </p>
-                      <h3 className="p-[10px] text-center font-poppins font-normal max-ss:text-slate-500 break-all text-[16px] ss:mt-[20px]">
+                      <h3 className="p-[10px] text-center font-poppins font-normal max-ss:text-slate-400 text-white break-words break-all text-[16px] ss:mt-[20px]">
                         {user.emailAddress}
                       </h3>
         
@@ -90,11 +90,11 @@ const verify_user = ({state}) =>{
         
                     <div className="justify-center items-center ss:w-[15%] w-full">
                       <div className=" max-ss:border-b border-black max-ss:w-[100%] flex max-ss:flex-row flex-col justify-left ">
-                      <p className="p-[10px] text-center max-ss:text-slate-900 max-ss:ml-[40px]">
+                      <p className="p-[10px] text-center max-ss:text-slate-900 max-ss:ml-[40px] text-secondary">
                         Contact
-                      <hr className="w-full  bg-black max-ss:opacity-0" />
+                      <hr className="w-full  bg-white opacity-50 max-ss:opacity-0" />
                       </p>
-                      <h3 className="p-[10px] text-center font-poppins font-normal max-ss:text-slate-500  text-[16px] ss:mt-[20px]">
+                      <h3 className="p-[10px] text-center font-poppins font-normal max-ss:text-slate-400 text-white break-words  text-[16px] ss:mt-[20px]">
                         {user.contact}
                       </h3>
         
@@ -103,11 +103,11 @@ const verify_user = ({state}) =>{
         
                     <div className="justify-center items-center ss:w-[15%] w-full">
                       <div className=" max-ss:border-b border-black max-ss:w-[100%] flex max-ss:flex-row flex-col justify-left ">
-                      <p className="p-[10px] text-center max-ss:text-slate-900 max-ss:ml-[40px]">
+                      <p className="p-[10px] text-center max-ss:text-slate-900 max-ss:ml-[40px] text-secondary">
                         Ghana Card
-                      <hr className="w-full  bg-black max-ss:opacity-0" />
+                      <hr className="w-full  bg-white opacity-50 max-ss:opacity-0" />
                       </p>
-                      <h3 className="p-[10px] text-center font-poppins font-normal max-ss:text-slate-500  text-[16px] ss:mt-[20px]">
+                      <h3 className="p-[10px] text-center font-poppins font-normal max-ss:text-slate-400 text-white break-words  text-[16px] ss:mt-[20px]">
                         {user.ghanaCard}
                       </h3>
         

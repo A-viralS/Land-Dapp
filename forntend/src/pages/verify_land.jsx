@@ -216,7 +216,6 @@
           await transaction.wait();
           console.log("Transaction Is Successful.");
           alert("Transaction Is Successful.");
-          setErrorMessage('');
         } else {
           setErrorMessage("All fields are required for registering your land");
         }
@@ -272,7 +271,7 @@
         <Topnav />
         <div className=" min-h-[77.5vh]">
           <div className=" flex justify-center flex-col items-center relative pt-[50px]">
-            {isError && <ErrorMessage message={errorMessage} isOpen={isOpen} handleClose={handleClose}/>}
+            {/* {isError && <ErrorMessage message={errorMessage} isOpen={isOpen} handleClose={handleClose}/>} */}
             {landList.length === 0 ? (
               <p className="text-[24px] text-gradient font-extrabold font-poppins  my-[100px] min-h-[25.7vh] z-[50]">There is no Land Pending to be Verified.</p>
             ) : (

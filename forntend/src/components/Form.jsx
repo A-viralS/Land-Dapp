@@ -3,6 +3,7 @@ import * as ipfsClient from "ipfs-http-client";
 import { Buffer } from "buffer";
 import { landForm } from "../constants";
 // import { ethers } from "ethers";
+import {approve_badge} from "../assets"
 import ErrorMessage from "./ErrorMessage";
 
 const Form = ({ state }) => {
@@ -102,10 +103,10 @@ const Form = ({ state }) => {
   }
 
   return (
-    <div className="justify-center items-center bg-slate-200 flex pb-10">
+    <div className="justify-center items-center flex pb-10 relative">
 
       <form
-        className="mt-[50px] flex flex-col w-full items-center"
+        className="mt-[50px] flex flex-col w-full items-center z-[50]"
         onSubmit={registerLand}
         >
           {isError && 
@@ -132,7 +133,7 @@ const Form = ({ state }) => {
                     id={landForm.id}
                     onChange={handleFileChange}
                     placeholder={landForm.title}
-                    className="text-black p-2 border border-radius border-blue-500 text-[18px] font-poppins letterSpacing md:w-[400px] ss:w-[50vw] w-[70vw] focus:outline-0"
+                    className="text-black p-2 border border-radius bg-sky-100  border-blue-500 text-[18px] font-poppins letterSpacing md:w-[400px] ss:w-[50vw] w-[70vw] focus:outline-0"
                   />
                 ) : (
                   <input
@@ -140,7 +141,7 @@ const Form = ({ state }) => {
                     placeholder={landForm.title}
                     id={landForm.id}
                     onSubmit={handleSubmit}
-                    className="text-black p-2 border border-radius border-blue-500 text-[18px] font-poppins letterSpacing md:w-[400px] ss:w-[50vw] w-[70vw] focus:outline-0"
+                    className="text-black p-2 border border-radius bg-sky-100 border-blue-500 text-[18px] font-poppins letterSpacing md:w-[400px] ss:w-[50vw] w-[70vw] focus:outline-0"
                   />
                 )}
               </label>
@@ -165,14 +166,21 @@ const Form = ({ state }) => {
               </button>
             </>
           )}
-          {ipfsHash && (
+          {/* {ipfsHash && (
             <p className="mt-5 text-green-500 font-bold text-center">
               Your file hash: {ipfsHash}
             </p>
-          )}
+          )} */}
         </div>
       </form>
 
+      <div className="w-[200px] h-[200px]">`
+        <div className="absolute z-[2] w-[20%] h-[25%] opacity-50 right-0 top-0 left-30 pink__gradient"></div>
+        <div className="absolute z-[1] w-[40%] h-[40%] opacity-50 right-0 top-0 white__gradient"></div>
+        <div className="absolute z-[3] w-[20%] h-[20%] right-0 top-0 blue__gradient"></div>
+        <div className='absolute z-[1] w-full h-full opacity-80 right-0 top-0 bg-primary'></div>
+          <img src={approve_badge} alt="WaterMark" className="absolute opacity-10  w-[800px] h-[800px] right-0 top-0 -z-[0]"/>
+      </div>`
     </div>
   );
   

@@ -21,7 +21,7 @@ const App = () => {
       // 0x693f7340f03DCeB56a4eBbf2d5946FF57111bC48
       // Ganache delpoyment key 0x4F4E7ecBC9181e1e673F3a2557Ee24C9493c88DC
       // Goerli new deployment key 0x51A8E56061bE5C44b014fA897C20aaC48D34623d
-      const contractAddress="0x4F4E7ecBC9181e1e673F3a2557Ee24C9493c88DC";
+      const contractAddress="0xEF446B7D99962aA585019A931c3a03f6cf8FB0Db";
       const contractABI=abi.abi;
 
       //Metamask Part

@@ -1,10 +1,9 @@
 import styles from "../style"
 import {login_image, view, metalogo} from '../assets';
 import dotenv from 'dotenv';
-
+import { useNavigate } from 'react-router-dom';
 import { useState } from "react";
 import {Navbar, Footer2} from '../components';
-import { useNavigate } from "react-router-dom";
 
 // function ShowPassword() {
 //   var x = document.getElementById("password");
@@ -23,10 +22,11 @@ const login = ({state, account}) => {
   const checkUser = async (event) => {
     event.preventDefault();
     const {contract} = state;
-  
+    
     try {
       const users = await contract.getUsers();
       if (users && users.length > 0) {
+        console.log("Hello")
         let userFound = false;
         for (let i = 0; i < users.length; i++) {
           if (users[i].walletAddress.toLowerCase() === account) {
@@ -48,6 +48,9 @@ const login = ({state, account}) => {
           // Do something here
         }
       }
+      else{
+        navigate(`/user registration`)
+      }
     } catch (error) {
       console.log("Error: ", error);
     }
@@ -55,7 +58,7 @@ const login = ({state, account}) => {
 
   const  checkCommissioner = async (event) => {
     event.preventDefault();  
-    const contractAccount = "0x9EB1a6588827d67AD3D8E9064B06aA43E2CaA1A2";
+    const contractAccount = "0x62ddc6b5926F1d9b2C8e55A73c9d84a697071a71";
     try {
       if (account === contractAccount.toLowerCase()) {
           // User is in the list
@@ -158,12 +161,18 @@ const login = ({state, account}) => {
               <p className={` ${styles.paragraph}`}>
                 Or Click to Continue with Metamask <br />
                 {/* {ethBalance} */}
-                Connected account : {account}
+                {/* Connected account : {account} */}
+                {account ? (
+                  <p className="text-secondary text-[20px]">You Are Connected</p>
+                ):
+                (
+                  <p className="text-red-900 text-[20px]">You Are Not Connected, Please Connect your MetaMask Wallet</p>
+                )}
               </p>
-              <button id="meta-btn" className={`meta-btn`} >
+              <div id="meta-btn" className={`meta-btn`} >
                 <img src={metalogo} alt="Meta Logo" className={`meta-img`}/>
                 <p className={`meta-p`}>MetaMask</p>
-              </button>
+              </div>
               {/* {
                 !isConnected && (
                   

@@ -25,7 +25,7 @@ const inspector_dashboard = ({state, account}) => {
         <div>
             <div className={` w-full py-10 relative`}>
               {List.map((inspector) => (
-                <div className=" min-h-[20.4vh]">
+                <div className=" min-h-[36.8vh]">
                    {inspector.walletAddress.toLowerCase() === ethereum.selectedAddress ?
                   <div className="w-full flex top-[200px] xs:gap-36 gap-20  xs:flex-row flex-col justify-center text-center items-center z-[10] absolute" key={Math.random()}>
                     <div className=" w-[300px] h-[150px] bg-indigo-800 items-center pt-[40px] rounded-[10px]">
