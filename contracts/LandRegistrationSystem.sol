@@ -353,12 +353,30 @@ contract LandRegistrationSystem {
         return result;
     }
 
+    // function getLandSold() external view returns (uint256 landSold) {
+    //     for (uint256 i = 0; i < user.length; i++) {
+    //         if (user[i].walletAddress == msg.sender) {
+    //             return user[i].landSold;
+    //         }
+    //     }
+    // }
+
+
     function buyLand(uint256 landId) public payable {
         require(land[landId].verified == true, "Land is not yet verified");
         require(land[landId].forSell == true, "Land is not for sale");
         require(msg.value >0, "Insufficient funds, Please You pay more than 0 ether");
 
+        address previousOwner = land[landId].owner;
         address payable seller = payable(land[landId].owner);
+
+        for (uint256 i = 0; i < user.length; i++) {
+            if (user[i].walletAddress == previousOwner) {
+                user[i].landSold += 1;
+                break;
+            }
+        }
+
         seller.transfer(msg.value);
         land[landId].owner = msg.sender;
         lands[landId] = msg.sender;

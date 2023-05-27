@@ -89,6 +89,13 @@ const profile = ({state, account}) => {
                         </div>
                         <div className="text-[16px] max-md:text-right text-white">{profile.contact}</div>
                       </div>
+
+                      <div className={` flex flex-row items-center xs:gap-10 border-cyan-900 w-[100%] xs:w-[75%] p-3`}>
+                        <div className=" font-bold text-[20px] w-[200px] text-secondary text-opacity-80">
+                        Land Sold
+                        </div>
+                        <div className="text-[16px] max-md:text-right text-white">{profile.landSold.toString()}</div>
+                      </div>
                     </div>
                   </div>
               </div>

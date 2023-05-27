@@ -3,17 +3,20 @@ import { useState, useEffect } from "react";
 import styles from '../style';
 import { approve_badge } from '../assets';
 
-const user_dashboard = ({state}) => {
+const user_dashboard = ({state, account}) => {
   const [count, setLandList] = useState([])
   const {contract} = state;
   const [errorMessage, setErrorMessage] = useState("");
+  const [profile, setProfile] = useState([]);
+
 
 
   useEffect(() =>{
     const getCount = async (event) => {
       const data = await contract.countOwnerLands();
+      const user = await contract.getUsers();
+      setProfile(user)
       setLandList(data.toString())
-      console.log(data.toString())
     };
     contract && getCount()
 
@@ -39,12 +42,21 @@ const user_dashboard = ({state}) => {
             {count}
             </h1>
           </div>
-          <div className=" w-[300px] h-[150px] bg-red-800 items-center pt-[40px] rounded-[10px]">
-            <p className={` ${styles.paragraph}`}> Land Sold</p>
-            <h1 className="text-white font-poppins text-[24px] font-bold">
-              0
-            </h1>
-          </div>
+          {profile.map((profile) => (
+            <>
+              {profile.walletAddress.toLowerCase()== account &&
+                <>
+                  <div className=" w-[300px] h-[150px] bg-red-800 items-center pt-[40px] rounded-[10px]">
+                    <p className={` ${styles.paragraph}`}> Land Sold</p>
+                    <h1 className="text-white font-poppins text-[24px] font-bold">
+                      {profile.landSold.toString()}
+                    </h1>
+                  </div>
+                </>
+              } 
+            </>
+          ))};
+
         </div>
         {/* <Requestdetails state={state}/> */}
         <div className="w-[200px] h-[200px]">

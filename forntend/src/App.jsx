@@ -19,9 +19,9 @@ const App = () => {
       // 0x5EF3a388AF7C8A152C67DbF56cDECe7fF2E76e55
       //
       // 0x693f7340f03DCeB56a4eBbf2d5946FF57111bC48
-      // Ganache delpoyment key 0x4F4E7ecBC9181e1e673F3a2557Ee24C9493c88DC
+      // Ganache delpoyment key 0x461664E711508cf35d10D987cA97D43381D93ceB
       // Goerli new deployment key 0x51A8E56061bE5C44b014fA897C20aaC48D34623d
-      const contractAddress="0xEF446B7D99962aA585019A931c3a03f6cf8FB0Db";
+      const contractAddress="0x461664E711508cf35d10D987cA97D43381D93ceB";
       const contractABI=abi.abi;
 
       //Metamask Part
@@ -69,7 +69,7 @@ const App = () => {
         <Route path='/property'  element={<Property state={state}/>} />
         <Route path='/requested'  element={<Requested state={state}/>} />
         <Route path='/requests'  element={<Requests state={state}/>} />
-        <Route path='/user dashboard'  element={<User_dashboard state={state}/>} />
+        <Route path='/user dashboard'  element={<User_dashboard state={state} account={account}/>} />
         <Route path='/user registration'  element={<User_registration state={state}/>} />
         <Route path='/register land'  element={<Register_land state={state}/>} />
         <Route path='/inspector dashboard'  element={<Inspector_dashboard state={state} account={account}/>} />
