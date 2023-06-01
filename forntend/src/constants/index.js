@@ -431,18 +431,18 @@ export const stats = [
   {
     id: "stats-2",
     title: "Trusted by Company",
-    value: "Ghana Land Commission",
+    value: "Owners Land Registration",
   },
   
   {
     id: "stats-1",
     title: "User Active",
-    value: "0",
+    value: "5+",
   },
   
   {
     id: "stats-3",
     title: "Transaction",
-    value: "$0",
+    value: "$1000+",
   },
 ];

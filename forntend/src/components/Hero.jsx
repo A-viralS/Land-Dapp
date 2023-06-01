@@ -10,7 +10,7 @@ const Hero = () => (
         <img src={discount} alt="discount" className='w-[32px] h-[32px]'/>
         <p className={`${styles.paragraph} ml-2`}>
           <span className='text-white'>
-            Ghana
+            JDFK
           </span> Land Registration{" "}
           <span className='text-white'>
             And Ownership

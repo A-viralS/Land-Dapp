@@ -7,6 +7,8 @@ const PropertyDetail = ({ state }) =>{
   const [landList, setLandList] = useState([])
   const {contract} = state;
   const [errorMessage, setErrorMessage] = useState("");
+  const [refreshCount, setRefreshCount] = useState(0);
+
 
 
   useEffect(() =>{
@@ -42,6 +44,7 @@ const PropertyDetail = ({ state }) =>{
       setErrorMessage("An error occurred while registering the land");
     }
   checkForError()
+  setRefreshCount((prevCount) => prevCount + 1);
   }
   const putForSell = async (event) => {
     event.preventDefault();
@@ -65,6 +68,7 @@ const PropertyDetail = ({ state }) =>{
       setErrorMessage("An error occurred while putting land for Sale");
     }
   checkForError()
+  setRefreshCount((prevCount) => prevCount + 1);
   }
 
   const [isError, setError] = useState(false);

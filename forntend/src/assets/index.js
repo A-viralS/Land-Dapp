@@ -23,9 +23,9 @@ import twitter from "./twitter.svg";
 import people01 from "./people01.png";
 import people02 from "./people02.png";
 import people03 from "./people03.png";
-import block from "./block.jpg";
-import smart from "./smart.jpg";
-import howitworks from "./howitworks.jpeg";
+import block from "./block.png";
+import smart from "./smart.png";
+import howitworks from "./howitworks.png";
 import member1 from "./member1.jpg";
 import logo1 from "./logo.png";
 import blockchain from "./blockchain.png"
@@ -34,6 +34,7 @@ import view from "./view.png"
 import metalogo from "./metalogo.png"
 import back from "./back.png"
 import dashboard from "./dashboard.png"
+import dashboardGrowth from "./dashboard-growth.png"
 import discord from "./discord.png"
 import user from "./user.png"
 import parthenon from "./parthenon.png"
@@ -82,6 +83,7 @@ export {
   metalogo,
   back,
   dashboard,
+  dashboardGrowth,
   discord,
   user,
   parthenon,

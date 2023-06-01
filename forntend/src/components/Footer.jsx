@@ -45,7 +45,7 @@ const Footer = () => (
       
     </div>
     
-    <div className="h-fit max-xs:h-[30vh] w-[100vw] bg-pink-300 mt-10">
+    {/* <div className="h-fit max-xs:h-[30vh] w-[100vw] bg-pink-300 mt-10">
     <div className={` w-[100%] h-[23px] bg-gray-900 mt-[0px]`}>
     </div>
     <div className={` w-[100%] h-[22px] bg-gray-900 mt-[1px]`}>
@@ -96,7 +96,7 @@ const Footer = () => (
     </div>
     <div className={` w-[100%] h-[0px] bg-gray-900 mt-[100px] max-xs:mt-[80px]`}>
     </div>
-    </div>
+    </div> */}
   </section>
 )
 

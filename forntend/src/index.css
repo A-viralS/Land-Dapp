@@ -73,6 +73,17 @@
     #FFDD00 90.29%
   );
 }
+.hover-bg-amber-gradient {
+  background: linear-gradient(
+    157.81deg,
+    #fff29b -21.24%,
+    #ffed79 12.19%,
+    #ffe53a 51.94%,
+    #ffea61 29.82%,
+    #fff7c3 -43.27%,
+    #FFDD00 90.29%
+  );
+}
 
 .bg-black-gradient {
   background: linear-gradient(

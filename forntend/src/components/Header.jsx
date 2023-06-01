@@ -43,7 +43,7 @@ const Header = () =>{
                 <div className="absolute top-[100px] left-0 right-0 bottom-0 flex items-center justify-center self-center text-white w-[100vw]">
                 <div className="container mx-auto text-center py-[100px] bg-gray-700 hover:bg-opacity-20 bg-opacity-40">
                     <h1 className="text-5xl font-bold mb-8">About Us</h1>
-                    <p className="text-lg bg-transparent text-white hover:border-transparent border-b-2 border-transparent">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam a semper nibh, nec facilisis nibh.</p>
+                    <p className="text-lg bg-transparent text-white hover:border-transparent border-b-2 border-transparent px-5">Welcome to the Land Registration System! We are dedicated to providing a reliable and efficient platform for the registration and management of land ownership. Our system aims to streamline the process of land registration, ensuring transparency, security, and ease of access for property owners, buyers, and government authorities.</p>
                 </div>
                 </div>
                 {/* <Slider {...settings}>

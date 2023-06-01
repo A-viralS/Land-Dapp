@@ -10,7 +10,7 @@ const requests = ({ state }) => {
   const [landList, setLandList] = useState([]);
   const { contract } = state;
   const [errorMessage, setErrorMessage] = useState("");
-  const [isEmpty, setIsEmpty] = useState(false);
+  // const [isEmpty, setIsEmpty] = useState(false);
   const [isError, setIsError] = useState(false);
   const [showMessage, setShowMessage] = useState(false);
   const [isOpen, setIsOpen] = useState(true);
@@ -22,9 +22,19 @@ const requests = ({ state }) => {
     const _search = document.querySelector("#search").value;
     if (_search) {
       const data = await contract.searchLands(_search);
-      console.log(data)
-      setLandList(data);
-      checkForEmpty();
+      console.log(data.length)
+      if (data.length>0) {
+        setLandList(data);
+      }
+      else {
+        setLandList([])
+        setShowMessage(true);
+        setTimeout(() => {
+          setShowMessage(false);
+        }, 5000);
+      }
+      // checkForEmpty();
+
     } else {
       setErrorMessage("City or District is Required.");
       setIsError(true);
@@ -32,24 +42,24 @@ const requests = ({ state }) => {
     }
   };
 
-  const checkForError = () => {
-    if (errorMessage !== "") {
-      // setIsError(true);
-      setIsOpen(true);
-    }
-  };
+  // const checkForError = () => {
+  //   if (errorMessage !== "") {
+  //     // setIsError(true);
+  //     setIsOpen(true);
+  //   }
+  // };
 
-  const checkForEmpty = () => {
-    if (landList.length===0) {
-      setIsEmpty(true);
-      setShowMessage(true);
-      setTimeout(() => {
-        setShowMessage(false);
-      }, 5000);
-    } else {
-      setIsEmpty(false);
-    }
-  };
+  // const checkForEmpty = () => {
+  //   if (landList==0) {
+  //     // setIsEmpty(true);
+  //     setShowMessage(true);
+  //     setTimeout(() => {
+  //       setShowMessage(false);
+  //     }, 5000);
+  //   } else {
+  //     setIsEmpty(false);
+  //   }
+  // };
 
 
 
@@ -130,8 +140,8 @@ const requests = ({ state }) => {
           )}
 
           {showMessage && (
-            <div className="px-4 transition-all">
-              <p className="text-red-500 font-semibold open-sans text-[24px] text-center py-2 animate-pulse ">
+            <div className="px-4 transition-all absolute self-center bg-red-600  w-full">
+              <p className="text-white font-semibold open-sans text-[24px] text-center py-2 animate-pulse ">
                 Land Not Found
               </p>
             </div>
