@@ -24,12 +24,13 @@ const login = ({state, account}) => {
     const {contract} = state;
     
     try {
-      const users = await contract.getUsers();
+      // const users = await contract.getUsers();
+      const users= ['0xe295bBBc446213D1E42B37f33AEEf79057aF326c']
       if (users && users.length > 0) {
         console.log("Hello")
         let userFound = false;
         for (let i = 0; i < users.length; i++) {
-          if (users[i].walletAddress.toLowerCase() === account) {
+          if (users[i].toLowerCase() === account) {
             userFound = true;
             break;
           }
@@ -58,7 +59,7 @@ const login = ({state, account}) => {
 
   const  checkCommissioner = async (event) => {
     event.preventDefault();  
-    const contractAccount = "0x62ddc6b5926F1d9b2C8e55A73c9d84a697071a71";
+    const contractAccount = "0xDA3B1f100c25c701AFF7af95f72FEdb119bC36BD";
     try {
       if (account === contractAccount.toLowerCase()) {
           // User is in the list
@@ -78,15 +79,20 @@ const login = ({state, account}) => {
   };
 
   const checkLandInspector = async (event) => {
+    console.log("etnering land")
     event.preventDefault();
     const {contract} = state;
-  
+    console.log("etnering land")
+    
     try {
-      const users = await contract.getInspectors();
+      console.log("hello")
+      // const users = await contract.getInspectors(); 
+      const users=['0xc2549643ef0D2C84C56cAD7Db90206561c0A7cd9']
+      console.log("inspectors", users)
       if (users && users.length > 0) {
         let userFound = false;
         for (let i = 0; i < users.length; i++) {
-          if (users[i].walletAddress.toLowerCase() === account) {
+          if (users[i].toLowerCase() === account) {
             userFound = true;
             break;
           }
@@ -98,7 +104,7 @@ const login = ({state, account}) => {
           navigate('/inspector dashboard', {replace: true});
         } else {
           // Inspector is not in the list
-          console.log(users)
+          console.log("users",users)
           console.log("User is not authorized");
           alert("Inspector is not authorized");
         }
